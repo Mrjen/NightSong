@@ -303,7 +303,13 @@ export default class Index extends wepy.page {
 
   methods = {
     audioPlay: function() {
-      this.audioCtx.play();
+      let that = this;
+      let song = that.song;
+      wx.playBackgroundAudio({
+        dataUrl: song.audio,
+        title: song.name,
+        coverImgUrl: ''
+      })
       this.musicStatus = !this.musicStatus;
       this.$apply();
     },
