@@ -12,8 +12,8 @@ import 'api' from 'comm/api'
 export default class extends wepy.app {
   config = {
     pages: [
-           "pages/index",
-           "pages/list"
+            "pages/list",
+           "pages/index"
           ],
     window: {
       navigationBarTitleText: "一夜一曲",

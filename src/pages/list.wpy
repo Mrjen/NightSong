@@ -46,11 +46,54 @@ page {
     }
   }
 }
+
+.option_btn {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 150rpx;
+      margin-bottom: 70rpx;
+      view {
+        width: 40rpx;
+        height: 40rpx;
+        image {
+          display: block;
+          width: 40rpx;
+          height: 40rpx;
+        }
+      }
+    }
 </style>
 
 <template>
   <view>
+      <view class="week"></view>
+      <view>week</view>
+      <!-- 控制区 -->
+           <view class="option_btn">
+             <view class="collect">
+                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
+                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
+             </view>
+             <view class="prev" @tap="prevMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"></image>
+             </view>
+             <view class="play">
+                 <image wx:if="{{!musicStatus}}" @tap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
+                 <image wx:else  @tap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
+             </view>
+             <view class="next" @tap="nextMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"></image>
+             </view>
+             <view class="cycle">
+                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"></image>
+                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"></image>
+             </view>
+         </view>
+
       <view class="song_list">
+           
+
           <view class="title">排行榜</view>
           <scroll-view>
              <view class="song_view">

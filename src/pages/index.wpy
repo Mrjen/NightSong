@@ -225,7 +225,7 @@
            </view>
          <!-- 导航 -->
          <navigator class="nav nav_mycollect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"></image></navigator>
-         <navigator class="nav nav_list"><image src="https://qncdn.playonwechat.com/NightSong/list_icon.png"></image></navigator>
+         <navigator class="nav nav_list" url="list"><image src="https://qncdn.playonwechat.com/NightSong/list_icon.png"></image></navigator>
      </view>
     <audio class="myAudio" name="{{name}}" src="{{song.crc}}" id="myAudio" loop></audio>
 
