@@ -6,15 +6,19 @@ view {
 </style>
 
 <script>
-import wepy from "wepy"
-import "wepy-async-function"
-import 'api' from 'comm/api'
+import wepy from "wepy";
+import "wepy-async-function";
+import myRequest from "./comm/wxRequest"
+import api from './comm/api'
 export default class extends wepy.app {
   config = {
-    pages: [
-            "pages/list",
-           "pages/index"
-          ],
+    pages: [ 
+       "pages/index",
+      "pages/list",
+      
+      'pages/collect'
+     
+      ],
     window: {
       navigationBarTitleText: "一夜一曲",
       navigationBarBackgroundColor: "#21282e",
@@ -32,8 +36,14 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    this.testAsync();
-    console.log(api)
+    this.testAsync("onLaunch");
+    wepy.login({
+      success(res) {
+        wx.myRequest({code:res.code}, api.auth, function(res) {
+          console.log("授权成功")
+        });
+      }
+    });
   }
 
   sleep(s) {
@@ -42,10 +52,6 @@ export default class extends wepy.app {
         resolve("promise resolved");
       }, s * 1000);
     });
-  }
-
-  onLoad(){
-    console.log(api)
   }
 
   async testAsync() {

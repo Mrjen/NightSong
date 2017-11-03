@@ -95,7 +95,6 @@ var _class = function () {
         _classCallCheck(this, _class);
 
         this.$com = {};
-        this.$events = {};
         this.$mixins = [];
         this.$isComponent = true;
         this.$prefix = '';
@@ -159,21 +158,15 @@ var _class = function () {
                             if ((typeof binded === 'undefined' ? 'undefined' : _typeof(binded)) === 'object') {
                                 (function () {
                                     props[key].repeat = binded.for;
-                                    props[key].item = binded.item;
-                                    props[key].index = binded.index;
-                                    props[key].key = binded.key;
-                                    props[key].value = binded.value;
 
                                     inRepeat = true;
 
                                     var bindfor = binded.for,
                                         binddata = $parent;
                                     bindfor.split('.').forEach(function (t) {
-                                        binddata = binddata ? binddata[t] : {};
+                                        binddata = binddata[t];
                                     });
-                                    if (binddata && ((typeof binddata === 'undefined' ? 'undefined' : _typeof(binddata)) === 'object' || typeof binddata === 'string')) {
-                                        repeatKey = Object.keys(binddata)[0];
-                                    }
+                                    repeatKey = Object.keys(binddata)[0];
 
                                     if (!_this2.$mappingProps[key]) _this2.$mappingProps[key] = {};
                                     _this2.$mappingProps[key]['parent'] = {
@@ -188,8 +181,6 @@ var _class = function () {
                                     this.$mappingProps[key]['parent'] = binded;
                                 }
                             }
-                        } else if ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' && val.value !== undefined) {
-                            this.data[key] = val.value;
                         }
                     }
                     if (!this.data[key] && !props[key].repeat) {
@@ -199,17 +190,13 @@ var _class = function () {
                 }
             }
 
-            if (typeof this.data === 'function') {
-                this.data = this.data.apply(this.data);
-            }
-
             for (k in this.data) {
                 defaultData['' + this.$prefix + k] = this.data[k];
                 this[k] = this.data[k];
             }
 
             this.$data = _util2.default.$copy(this.data, true);
-            if (inRepeat && repeatKey !== undefined) this.$setIndex(repeatKey);
+            if (inRepeat) this.$setIndex(repeatKey);
 
             if (this.computed) {
                 for (k in this.computed) {
@@ -285,23 +272,15 @@ var _class = function () {
         }
     }, {
         key: 'getCurrentPages',
-        value: function (_getCurrentPages) {
-            function getCurrentPages() {
-                return _getCurrentPages.apply(this, arguments);
-            }
-
-            getCurrentPages.toString = function () {
-                return _getCurrentPages.toString();
-            };
-
-            return getCurrentPages;
-        }(function () {
-            return getCurrentPages();
-        })
+        value: function getCurrentPages() {
+            return this.$wxpage.getCurrentPages();
+        }
     }, {
         key: '$setIndex',
         value: function $setIndex(index) {
             var _this4 = this;
+
+            if (this.$index === index) return;
 
             this.$index = index;
 
@@ -322,20 +301,10 @@ var _class = function () {
                                     var bindfor = binded.for,
                                         binddata = $parent;
                                     bindfor.split('.').forEach(function (t) {
-                                        binddata = binddata ? binddata[t] : {};
+                                        binddata = binddata[t];
                                     });
 
-                                    index = Array.isArray(binddata) ? +index : index;
-
-                                    if (props[key].value === props[key].item) {
-                                        val = binddata[index];
-                                    } else if (props[key].value === props[key].index) {
-                                        val = index;
-                                    } else if (props[key].value === props[key].key) {
-                                        val = index;
-                                    } else {
-                                        val = $parent[props[key].value];
-                                    }
+                                    val = binddata[index];
                                     _this4.$index = index;
                                     _this4.data[key] = val;
                                     _this4[key] = val;
@@ -459,15 +428,13 @@ var _class = function () {
             var source = this;
             var $evt = new _event2.default(evtName, source, 'emit');
 
-            args = args.concat($evt);
-
-            if (this.$parent && this.$parent.$events && this.$parent.$events[this.$name]) {
+            if (this.$parent.$events && this.$parent.$events[this.$name]) {
                 var method = this.$parent.$events[this.$name]['v-on:' + evtName];
                 if (method && this.$parent.methods) {
                     var _fn = this.$parent.methods[method];
                     if (typeof _fn === 'function') {
                         this.$parent.$apply(function () {
-                            _fn.apply(_this6.$parent, args);
+                            _fn.apply(_this6.$parent, args.concat($evt));
                         });
                         return;
                     } else {
@@ -479,80 +446,15 @@ var _class = function () {
             var _loop2 = function _loop2() {
                 var comContext = com;
                 var fn = getEventsFn(comContext, evtName);
-                if (fn) {
-                    if (typeof fn === 'function') {
-                        comContext.$apply(function () {
-                            fn.apply(comContext, args);
-                        });
-                    } else if (Array.isArray(fn)) {
-                        fn.forEach(function (f) {
-                            f.apply(comContext, args);
-                        });
-                        comContext.$apply();
-                    }
-                }
+                fn && comContext.$apply(function () {
+                    fn.apply(comContext, args.concat($evt));
+                });
                 com = comContext.$parent;
             };
 
             while (com && com.$isComponent !== undefined && $evt.active) {
                 _loop2();
             }
-        }
-    }, {
-        key: '$on',
-        value: function $on(evtName, fn) {
-            var _this7 = this;
-
-            if (typeof evtName === 'string') {
-                (this.$events[evtName] || (this.$events[evtName] = [])).push(fn);
-            } else if (Array.isArray(evtName)) {
-                evtName.forEach(function (k) {
-                    _this7.$on(k, fn);
-                });
-            } else if ((typeof evtName === 'undefined' ? 'undefined' : _typeof(evtName)) === 'object') {
-                for (var k in evtName) {
-                    this.$on(k, evtName[k]);
-                }
-            }
-            return this;
-        }
-    }, {
-        key: '$once',
-        value: function $once(evtName, fn) {
-            var self = this;
-            var oncefn = function oncefn() {
-                self.$off(evtName, oncefn);
-                fn.apply(self, arguments);
-            };
-            oncefn.fn = fn;
-            this.$on(evtName, oncefn);
-        }
-    }, {
-        key: '$off',
-        value: function $off(evtName, fn) {
-            var _this8 = this;
-
-            if (evtName === undefined) {
-                this.$events = {};
-            } else if (typeof evtName === 'string') {
-                if (fn) {
-                    var fns = this.$events[evtName];
-                    var i = fns.length;
-                    while (i--) {
-                        if (fn === fns[i] || fn === fns[i].fn) {
-                            fns.splice(i, 1);
-                            break;
-                        }
-                    }
-                } else {
-                    this.$events[evtName] = [];
-                }
-            } else if (Array.isArray(evtName)) {
-                evtName.forEach(function (k) {
-                    _this8.$off(k, fn);
-                });
-            }
-            return this;
         }
     }, {
         key: '$apply',
@@ -571,23 +473,13 @@ var _class = function () {
     }, {
         key: '$digest',
         value: function $digest() {
-            var _this9 = this;
+            var _this7 = this;
 
             var k = void 0;
             var originData = this.$data;
             this.$$phase = '$digest';
             while (this.$$phase) {
                 var readyToSet = {};
-                if (this.computed) {
-                    for (k in this.computed) {
-                        var _fn2 = this.computed[k],
-                            val = _fn2.call(this);
-                        if (!_util2.default.$isEqual(this[k], val)) {
-                            readyToSet[this.$prefix + k] = val;
-                            this[k] = _util2.default.$copy(val, true);
-                        }
-                    }
-                }
                 for (k in originData) {
                     if (!_util2.default.$isEqual(this[k], originData[k])) {
                         if (this.watch) {
@@ -603,31 +495,35 @@ var _class = function () {
                         readyToSet[this.$prefix + k] = this[k];
                         this.data[k] = this[k];
                         originData[k] = _util2.default.$copy(this[k], true);
-                        if (this.$repeat && this.$repeat[k]) {
-                            var $repeat = this.$repeat[k];
-                            this.$com[$repeat.com].data[$repeat.props] = this[k];
-                            this.$com[$repeat.com].$setIndex(0);
-                            this.$com[$repeat.com].$apply();
-                        }
                         if (this.$mappingProps[k]) {
                             Object.keys(this.$mappingProps[k]).forEach(function (changed) {
-                                var mapping = _this9.$mappingProps[k][changed];
+                                var mapping = _this7.$mappingProps[k][changed];
                                 if ((typeof mapping === 'undefined' ? 'undefined' : _typeof(mapping)) === 'object') {
-                                    _this9.$parent.$apply();
-                                } else if (changed === 'parent' && !_util2.default.$isEqual(_this9.$parent.$data[mapping], _this9[k])) {
-                                    _this9.$parent[mapping] = _this9[k];
-                                    _this9.$parent.data[mapping] = _this9[k];
-                                    _this9.$parent.$apply();
-                                } else if (changed !== 'parent' && !_util2.default.$isEqual(_this9.$com[changed].$data[mapping], _this9[k])) {
-                                    _this9.$com[changed][mapping] = _this9[k];
-                                    _this9.$com[changed].data[mapping] = _this9[k];
-                                    _this9.$com[changed].$apply();
+                                    _this7.$parent.$apply();
+                                } else if (changed === 'parent' && !_util2.default.$isEqual(_this7.$parent.$data[mapping], _this7[k])) {
+                                    _this7.$parent[mapping] = _this7[k];
+                                    _this7.$parent.data[mapping] = _this7[k];
+                                    _this7.$parent.$apply();
+                                } else if (changed !== 'parent' && !_util2.default.$isEqual(_this7.$com[changed].$data[mapping], _this7[k])) {
+                                    _this7.$com[changed][mapping] = _this7[k];
+                                    _this7.$com[changed].data[mapping] = _this7[k];
+                                    _this7.$com[changed].$apply();
                                 }
                             });
                         }
                     }
                 }
                 if (Object.keys(readyToSet).length) {
+                    if (this.computed) {
+                        for (k in this.computed) {
+                            var _fn2 = this.computed[k],
+                                val = _fn2.call(this);
+                            if (!_util2.default.$isEqual(this[k], val)) {
+                                readyToSet[this.$prefix + k] = val;
+                                this[k] = _util2.default.$copy(val, true);
+                            }
+                        }
+                    }
                     this.setData(readyToSet);
                 }
                 this.$$phase = this.$$phase === '$apply' ? '$digest' : false;
@@ -642,7 +538,7 @@ exports.default = _class;
 
 
 function getEventsFn(comContext, evtName) {
-    var fn = comContext.events ? comContext.events[evtName] : comContext.$events[evtName] ? comContext.$events[evtName] : undefined;
+    var fn = comContext.events ? comContext.events[evtName] : undefined;
     var typeFn = typeof fn === 'undefined' ? 'undefined' : _typeof(fn);
     var fnFn = void 0;
     if (typeFn === 'string') {
@@ -650,7 +546,7 @@ function getEventsFn(comContext, evtName) {
         if (typeof method === 'function') {
             fnFn = method;
         }
-    } else if (typeFn === 'function' || Array.isArray(fn)) {
+    } else if (typeFn === 'function') {
         fnFn = fn;
     }
     return fnFn;

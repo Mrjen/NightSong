@@ -37,8 +37,8 @@
          <view class="song_name">{{song.name}}</view>
          <view class="option_btn">
              <view class="collect">
-                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"/>
-                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"/>
+                 <image bindtap="collectSong" wx:if="{{song.collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png" data-wepy-params-a="{{index}}"/>
+                 <image bindtap="discollectSong" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"/>
              </view>
              <view class="prev" bindtap="prevMusic">
                  <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"/>
@@ -51,21 +51,22 @@
                  <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"/>
              </view>
              <view class="cycle">
-                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"/>
-                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
+                 <image wx:if="{{cycleSong==1?true:false}}" bindtap="cycleSont" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"/>
+                 <image bindtap="cycleSont" wx:if="{{cycleSong==1?false:true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
              </view>
          </view>
          <!-- 歌词 -->
            <view class="lycries_view">
                <!-- <view class="masked masked01"></view>
               <view class="masked masked02"></view> -->
-              <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px)">
+              <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px);opacity:{{lycriesStatus}}">
                  <view class="lycries" wx:for="{{song.word}}" wx:key="{{index}}">{{item}}</view>
               </view>
-               
+
+              <view style="transform:translateY(-{{currentLycHeight/2}}px)">禾葡兰{{song.techerName}}老师，祝您晚安</view>
            </view>
          <!-- 导航 -->
-         <navigator class="nav nav_mycollect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"/></navigator>
+         <navigator class="nav nav_mycollect" url="collect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"/></navigator>
          <navigator class="nav nav_list" url="list"><image src="https://qncdn.playonwechat.com/NightSong/list_icon.png"/></navigator>
      </view>
     <audio class="myAudio" name="{{name}}" src="{{song.crc}}" id="myAudio" loop/>

@@ -60,8 +60,8 @@ var $bindEvt = function $bindEvt(config, com, prefix) {
                 comIndex = void 0;
             if (e.currentTarget && e.currentTarget.dataset) {
                 tmp = e.currentTarget.dataset;
-                while (tmp['wpy' + method.toLowerCase() + (p = String.fromCharCode(65 + paramsLength++))] !== undefined) {
-                    wepyParams.push(tmp['wpy' + method.toLowerCase() + p]);
+                while (tmp['wepyParams' + (p = String.fromCharCode(65 + paramsLength++))] !== undefined) {
+                    wepyParams.push(tmp['wepyParams' + p]);
                 }
                 if (tmp.comIndex !== undefined) {
                     comIndex = tmp.comIndex;
@@ -134,7 +134,7 @@ exports.default = {
             k = void 0;
         var page = new pageClass();
         if (typeof pagePath === 'string') {
-            this.$instance.$pages['/' + pagePath] = page;
+            this.$instance.$pages[pagePath] = page;
         }
         page.$initMixins();
 

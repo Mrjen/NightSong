@@ -98,8 +98,7 @@ var _class = function (_component) {
             if (!this.$parent.__route__) {
                 this.$parent.__route__ = getCurrentPages()[0].__route__;
             }
-            var absoluteRoute = this.$parent.__route__[0] !== '/' ? '/' + this.$parent.__route__ : this.$parent.__route__;
-            var realPath = _util2.default.$resolvePath(absoluteRoute, url.url.split('?')[0]);
+            var realPath = _util2.default.$resolvePath(this.$parent.__route__, url.url.split('?')[0]);
             var goTo = this.$parent.$pages[realPath];
             if (goTo && goTo.onPrefetch) {
                 var prevPage = this.$parent.__prevPage__;
