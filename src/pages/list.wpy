@@ -1,0 +1,167 @@
+<style lang="less">
+page {
+  background: url(http://ovhvevt35.bkt.clouddn.com/NightSong/list_bg.png);
+  background-size: 100% 100%;
+}
+
+.song_list {
+  width: 540rpx;
+  height: 745rpx;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0 auto;
+  border-radius: 20rpx;
+  .title {
+    font-size: 30rpx;
+    text-align: center;
+    padding: 30rpx 0;
+    color: #fff;
+    margin-bottom: 20rpx;
+    border-bottom: 1px solid #fff;
+  }
+  .song_view {
+    width: 100%;
+    padding: 0 30rpx;
+    .song_item {
+      font-size: 24rpx;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .name {
+        color: #fff;
+        font-size: 24rpx;
+        width: 300rpx;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .option{
+          width: 40rpx;
+          height: 40rpx;
+          image{
+              width: 40rpx;
+              height: 40rpx;
+          }
+      }
+    }
+  }
+}
+</style>
+
+<template>
+  <view>
+      <view class="song_list">
+          <view class="title">排行榜</view>
+          <scroll-view>
+             <view class="song_view">
+                 <view class="song_item" wx:for="{{song}}">
+                     <view class="name">{{item.name}}</view><view>{{item.listen_num}}</view><view class="option">
+                         <image wx:if="{{!musicStatus}}" @tap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
+                 <image wx:else  @tap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
+                     </view>
+                 </view>
+             </view>
+          </scroll-view>
+      </view>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: "收听排行榜",
+    navigationBarBackgroundColor: "#21282e",
+    navigationBarTextStyle: "#fff",
+    disableScroll: true
+  };
+  data = {
+    song: [
+      {
+        src:
+          "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46",
+        name: "测试歌曲测试歌曲测试歌曲测试歌曲",
+        listen_num: "356645",
+        musicStatus: "0",
+        lycries: [
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          }
+        ]
+      },
+      {
+        src:
+          "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46",
+        name: "测试歌曲",
+        listen_num: "356645",
+        musicStatus: "0",
+        lycries: [
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          }
+        ]
+      },
+      {
+        src:
+          "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46",
+        name: "测试歌曲",
+        listen_num: "356645",
+        musicStatus: "0",
+        lycries: [
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          }
+        ]
+      },
+      {
+        src:
+          "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46",
+        name: "测试歌曲",
+        listen_num: "356645",
+        musicStatus: "0",
+        lycries: [
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          },
+          {
+            lycry: "测试歌词测试歌词"
+          }
+        ]
+      }
+    ]
+  };
+}
+</script>

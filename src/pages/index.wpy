@@ -1,0 +1,389 @@
+<style lang="less">
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .bg_list,
+  .bg_item {
+    width: 100%;
+    height: 100%;
+  }
+  .bg_item {
+    background-size: 100% 100%;
+    .page_icon {
+      width: 180rpx;
+      height: 147rpx;
+      position: relative;
+      left: 50%;
+      margin-left: -90rpx;
+      margin-top: 96rpx;
+    }
+
+    .light01 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      animation: light 3.5s infinite;
+    }
+  }
+  .bg_item2 .page_icon {
+    width: 155rpx;
+    height: 151rpx;
+  }
+  .bg_item3 .page_icon {
+    width: 161rpx;
+    height: 161rpx;
+  }
+  .bg_item4 .page_icon {
+    width: 168rpx;
+    height: 180rpx;
+  }
+  .bg_item5 .page_icon {
+    width: 148rpx;
+    height: 159rpx;
+  }
+  .bg_item6 .page_icon {
+    width: 156rpx;
+    height: 160rpx;
+  }
+  .bg_item7 .page_icon {
+    width: 179rpx;
+    height: 184rpx;
+  }
+
+  .option {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    padding-top: 326rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 24rpx;
+    .date {
+      font-size: 24rpx;
+      margin-bottom: 34rpx;
+    }
+    .song_name {
+      margin-bottom: 50rpx;
+    }
+    .option_btn {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 150rpx;
+      margin-bottom: 70rpx;
+      view {
+        width: 40rpx;
+        height: 40rpx;
+        image {
+          display: block;
+          width: 40rpx;
+          height: 40rpx;
+        }
+      }
+    }
+    .nav {
+      width: 90rpx;
+      height: 80rpx;
+      position: fixed;
+      image {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .nav_mycollect {
+      right: 150rpx;
+      bottom: 40rpx;
+    }
+    .nav_list {
+      right: 40rpx;
+      bottom: 40rpx;
+    }
+    .lycries_view {
+      width: 750rpx;
+      height: 450rpx;
+      // border:1px solid red;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      .masked {
+        height: 225rpx;
+        position: absolute;
+        width: 100%;
+      }
+      .masked01 {
+        left: 0;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.2);
+        // background-size: 750rpx 1221rpx;
+        // filter: blur(100px);
+      }
+      .masked02 {
+        left: 0;
+        bottom: 0;
+      }
+      .lycries {
+        height: 40rpx;
+        line-height: 40rpx;
+        border: 1px solid transparent;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+.myAudio {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+@keyframes light {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+</style>
+<template>
+  <view class='container'>
+    <!-- 页面背景   这里为啥不用循环？？？？我也很无奈啊 -->
+     <view class='bg_list'>
+         <view class="bg_item bg_item1"  wx:if="{{today===0}}" style="background-image:url({{bgList[0].image}})">
+            <image class="page_icon" src="{{bgList[0].icon}}"></image> 
+            <image class="light01" src="{{bgList[0].light}}"></image> 
+         </view>
+         <view class="bg_item bg_item2"  wx:if="{{today===1}}" style="background-image:url({{bgList[1].image}})">
+            <image class="page_icon" src="{{bgList[1].icon}}"></image> 
+            <image class="light01" src="{{bgList[1].light}}"></image> 
+         </view>
+         <view class="bg_item bg_item3"  wx:if="{{today===2}}" style="background-image:url({{bgList[2].image}})">
+            <image class="page_icon" src="{{bgList[2].icon}}"></image> 
+            <image class="light01" src="{{bgList[2].light}}"></image> 
+         </view>
+         <view class="bg_item bg_item4"  wx:if="{{today===3}}" style="background-image:url({{bgList[3].image}})">
+            <image class="page_icon" src="{{bgList[3].icon}}"></image> 
+            <image class="light01" src="{{bgList[3].light}}"></image> 
+         </view>
+         <view class="bg_item bg_item5"  wx:if="{{today===4}}" style="background-image:url({{bgList[4].image}})">
+            <image class="page_icon" src="{{bgList[4].icon}}"></image> 
+            <image class="light01" src="{{bgList[4].light}}"></image> 
+         </view>
+         <view class="bg_item bg_item6"  wx:if="{{today===5}}" style="background-image:url({{bgList[5].image}})">
+            <image class="page_icon" src="{{bgList[5].icon}}"></image> 
+            <image class="light01" src="{{bgList[5].light}}"></image> 
+         </view>
+         <view class="bg_item bg_item7"  wx:if="{{today===6}}" style="background-image:url({{bgList[6].image}})">
+            <image class="page_icon" src="{{bgList[6].icon}}"></image> 
+            <image class="light01" src="{{bgList[6].light}}"></image> 
+         </view>
+     </view>
+     <!-- 操作 -->
+     <view class="option">
+         <view class="date">{{todayWeek}}</view>
+         <view class="song_name">{{song.name}}</view>
+         <view class="option_btn">
+             <view class="collect">
+                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
+                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
+             </view>
+             <view class="prev" @tap="prevMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"></image>
+             </view>
+             <view class="play">
+                 <image wx:if="{{!musicStatus}}" @tap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
+                 <image wx:else  @tap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
+             </view>
+             <view class="next" @tap="nextMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"></image>
+             </view>
+             <view class="cycle">
+                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"></image>
+                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"></image>
+             </view>
+         </view>
+         <!-- 歌词 -->
+           <view class="lycries_view">
+               <!-- <view class="masked masked01"></view>
+              <view class="masked masked02"></view> -->
+              <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px)">
+                 <view class="lycries" wx:for="{{song.word}}" wx:key="{{index}}">{{item}}</view>
+              </view>
+               
+           </view>
+         <!-- 导航 -->
+         <navigator class="nav nav_mycollect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"></image></navigator>
+         <navigator class="nav nav_list"><image src="https://qncdn.playonwechat.com/NightSong/list_icon.png"></image></navigator>
+     </view>
+    <audio class="myAudio" name="{{name}}" src="{{song.crc}}" id="myAudio" loop></audio>
+
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+import myRequest from "../comm/wxRequest";
+import api from "../comm/api";
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: "一夜一曲",
+    navigationBarBackgroundColor: "#21282e",
+    navigationBarTextStyle: "#fff",
+    disableScroll: true
+  };
+
+  data = {
+    bgList: [
+      {
+        image: "https://qncdn.playonwechat.com/NightSong/night_bg01.png",
+        icon: "https://qncdn.playonwechat.com/NightSong/night_bg01_hearts.png",
+        light: "https://qncdn.playonwechat.com/NightSong/night_bg01_light.png",
+        id: 0
+      },
+      {
+        image: "https://qncdn.playonwechat.com/NightSong/night_bg02.png",
+        icon: "https://qncdn.playonwechat.com/NightSong/night_bg02_hearts.png",
+        light: "https://qncdn.playonwechat.com/NightSong/night_bg02_light.png",
+        id: 1
+      },
+      {
+        image: "https://qncdn.playonwechat.com/NightSong/night_bg03.png",
+        icon: "https://qncdn.playonwechat.com/NightSong/night_bg03_hearts.png",
+        light: "https://qncdn.playonwechat.com/NightSong/night_bg03_light.png",
+        id: 2
+      },
+      {
+        image: "https://qncdn.playonwechat.com/NightSong/night_bg04.png",
+        icon: "https://qncdn.playonwechat.com/NightSong/night_bg04_hearts.png",
+        light: "https://qncdn.playonwechat.com/NightSong/night_bg04_light.png",
+        id: 3
+      },
+      {
+        image: "https://qncdn.playonwechat.com/NightSong/night_bg05.png",
+        icon: "https://qncdn.playonwechat.com/NightSong/night_bg05_hearts.png",
+        light: "https://qncdn.playonwechat.com/NightSong/night_bg05_light.png",
+        id: 4
+      },
+      {
+        image: "https://qncdn.playonwechat.com/NightSong/night_bg06.png",
+        icon: "https://qncdn.playonwechat.com/NightSong/night_bg06_hearts.png",
+        light: "https://qncdn.playonwechat.com/NightSong/night_bg06_light.png",
+        id: 5
+      },
+      {
+        image: "https://qncdn.playonwechat.com/NightSong/night_bg07.png",
+        icon: "https://qncdn.playonwechat.com/NightSong/night_bg07_hearts.png",
+        light: "https://qncdn.playonwechat.com/NightSong/night_bg07_light.png",
+        id: 6
+      }
+    ],
+    today: 1, //今天是星期几
+    todayWeek: "", //星期几英文
+    currentLycHeight: 0, //当前歌词滚动高度
+    musicStatus: true,
+    song: {}
+  };
+
+  components = {};
+
+  methods = {
+    audioPlay: function() {
+      this.audioCtx.play();
+      this.musicStatus = !this.musicStatus;
+      this.$apply();
+    },
+    audioPause: function() {
+      this.audioCtx.pause();
+      this.musicStatus = !this.musicStatus;
+      this.$apply();
+    }
+  };
+
+  onPageScroll() {
+    console.log("页面滚动了");
+  }
+
+  onShow() {
+    console.log("show");
+  }
+
+  onLoad() {
+    console.log("onLoad");
+    let that = this;
+    //  音乐
+
+    this.audioCtx = wx.createAudioContext("myAudio");
+    this.audioCtx.setSrc(
+      "https://qncdn.playonwechat.com/Fnl_2wObn9udJxEZN21QpOUyvWxo"
+    );
+    this.audioCtx.play();
+
+    function getHeight(params, view) {
+      let currentLycHeight = 0;
+      let _height = 0;
+      let data = {};
+      let time = setInterval(() => {
+        // console.log(_height);
+        if (_height < params) {
+          _height += 2;
+        } else {
+          clearInterval(time);
+          _height = params;
+        }
+        view.currentLycHeight = _height;
+        view.$apply();
+      }, 30);
+    }
+
+    // 获取今天是星期几
+    let mydate = new Date();
+    let today = mydate.getDay();
+    console.log(today);
+    this.today = today;
+    let todayWeek = "";
+    if (this.today == "0") {
+      todayWeek = "Sunday"
+    } else if (this.today == "1") {
+      todayWeek = "Monday"
+    } else if (this.today == "2") {
+      todayWeek = "Tuesday"
+    } else if (this.today == "3") {
+      todayWeek = "Wednesday"
+    } else if (this.today == "4") {
+      todayWeek = "Thursday"
+    } else if (this.today == "5") {
+      todayWeek = "Friday"
+    } else if (this.today == "6") {
+      todayWeek = "Saturday"
+    }
+
+    this.todayWeek = todayWeek;
+    this.$apply();
+
+    // 获取首页数据
+    wx.myRequest({}, api.Home, function(res) {
+      that.song = res.data;
+      that.$apply();
+
+      //  控制歌词
+      let lycLength = that.song.word.length; //获取歌词有多少句
+      let lycHeight = lycLength * 40; //获取歌词容器的高度
+      getHeight(lycHeight,that)
+      that.song = res.data;
+      that.$apply();
+    });
+  }
+}
+</script>
