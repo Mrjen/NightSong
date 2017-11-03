@@ -4,6 +4,25 @@ page {
   background-size: 100% 100%;
 }
 
+.week {
+  width: 100%;
+  color: #fff;
+  padding-top: 50rpx;
+  text-align: center;
+}
+
+.song_name {
+  color: #fff;
+  font-size: 37rpx;
+  text-align: center;
+  margin-bottom: 34rpx;
+  border-bottom: 1px solid #fff;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .song_list {
   width: 540rpx;
   height: 745rpx;
@@ -35,40 +54,39 @@ page {
         overflow: hidden;
         white-space: nowrap;
       }
-      .option{
-          width: 40rpx;
-          height: 40rpx;
-          image{
-              width: 40rpx;
-              height: 40rpx;
-          }
-      }
-    }
-  }
-}
-
-.option_btn {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      padding: 0 150rpx;
-      margin-bottom: 70rpx;
-      view {
+      .option {
         width: 40rpx;
         height: 40rpx;
         image {
-          display: block;
           width: 40rpx;
           height: 40rpx;
         }
       }
     }
+  }
+}
+.option_btn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 150rpx;
+  margin-bottom: 46rpx;
+  view {
+    width: 40rpx;
+    height: 40rpx;
+    image {
+      display: block;
+      width: 40rpx;
+      height: 40rpx;
+    }
+  }
+}
 </style>
 
 <template>
   <view>
-      <view class="week"></view>
-      <view>week</view>
+      <view class="week">2222</view>
+      <view class="song_name">week</view>
       <!-- 控制区 -->
            <view class="option_btn">
              <view class="collect">
@@ -93,7 +111,6 @@ page {
 
       <view class="song_list">
            
-
           <view class="title">排行榜</view>
           <scroll-view>
              <view class="song_view">
@@ -122,7 +139,7 @@ export default class Index extends wepy.page {
     song: [
       {
         src:
-          "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46",
+          "https://qncdn.playonwechat.com/Fnl_2wObn9udJxEZN21QpOUyvWxo",
         name: "测试歌曲测试歌曲测试歌曲测试歌曲",
         listen_num: "356645",
         musicStatus: "0",
@@ -164,7 +181,7 @@ export default class Index extends wepy.page {
       },
       {
         src:
-          "http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46",
+          "https://qncdn.playonwechat.com/Fnl_2wObn9udJxEZN21QpOUyvWxo",
         name: "测试歌曲",
         listen_num: "356645",
         musicStatus: "0",

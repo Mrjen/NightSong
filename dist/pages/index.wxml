@@ -1,0 +1,73 @@
+
+  <view class="container">
+    <!-- 页面背景   这里为啥不用循环？？？？我也很无奈啊 -->
+     <view class="bg_list">
+         <view class="bg_item bg_item1"  wx:if="{{today===0}}" style="background-image:url({{bgList[0].image}})">
+            <image class="page_icon" src="{{bgList[0].icon}}"/> 
+            <image class="light01" src="{{bgList[0].light}}"/> 
+         </view>
+         <view class="bg_item bg_item2"  wx:if="{{today===1}}" style="background-image:url({{bgList[1].image}})">
+            <image class="page_icon" src="{{bgList[1].icon}}"/> 
+            <image class="light01" src="{{bgList[1].light}}"/> 
+         </view>
+         <view class="bg_item bg_item3" wx:if="{{today===2}}" style="background-image:url({{bgList[2].image}})">
+            <image class="page_icon" src="{{bgList[2].icon}}"/> 
+            <image class="light01" src="{{bgList[2].light}}"/> 
+         </view>
+         <view class="bg_item bg_item4" wx:if="{{today===3}}" style="background-image:url({{bgList[3].image}})">
+            <image class="page_icon" src="{{bgList[3].icon}}"/> 
+            <image class="light01" src="{{bgList[3].light}}"/> 
+         </view>
+         <view class="bg_item bg_item5" wx:if="{{today===4}}" style="background-image:url({{bgList[4].image}})">
+            <image class="page_icon" src="{{bgList[4].icon}}"/> 
+            <image class="light01" src="{{bgList[4].light}}"/> 
+         </view>
+         <view class="bg_item bg_item6" wx:if="{{today===5}}" style="background-image:url({{bgList[5].image}})">
+            <image class="page_icon" src="{{bgList[5].icon}}"/> 
+            <image class="light01" src="{{bgList[5].light}}"/> 
+         </view>
+         <view class="bg_item bg_item7" wx:if="{{today===6}}" style="background-image:url({{bgList[6].image}})">
+            <image class="page_icon" src="{{bgList[6].icon}}"/> 
+            <image class="light01" src="{{bgList[6].light}}"/> 
+         </view>
+     </view>
+     <!-- 操作 -->
+     <view class="option">
+         <view class="date">{{todayWeek}}</view>
+         <view class="song_name">{{song.name}}</view>
+         <view class="option_btn">
+             <view class="collect">
+                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"/>
+                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"/>
+             </view>
+             <view class="prev" bindtap="prevMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"/>
+             </view>
+             <view class="play">
+                 <image wx:if="{{!musicStatus}}" bindtap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"/>
+                 <image wx:else bindtap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"/>
+             </view>
+             <view class="next" bindtap="nextMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"/>
+             </view>
+             <view class="cycle">
+                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"/>
+                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
+             </view>
+         </view>
+         <!-- 歌词 -->
+           <view class="lycries_view">
+               <!-- <view class="masked masked01"></view>
+              <view class="masked masked02"></view> -->
+              <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px)">
+                 <view class="lycries" wx:for="{{song.word}}" wx:key="{{index}}">{{item}}</view>
+              </view>
+               
+           </view>
+         <!-- 导航 -->
+         <navigator class="nav nav_mycollect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"/></navigator>
+         <navigator class="nav nav_list" url="list"><image src="https://qncdn.playonwechat.com/NightSong/list_icon.png"/></navigator>
+     </view>
+    <audio class="myAudio" name="{{name}}" src="{{song.crc}}" id="myAudio" loop/>
+
+  </view>

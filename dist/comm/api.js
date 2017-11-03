@@ -1,0 +1,11 @@
+"use strict";
+
+// 主域名
+var apiUrl = "https://utest.playonwechat.com";
+// 首页数据
+var Home = apiUrl + '/music/App/home';
+
+module.exports = {
+    Home: Home
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwaS5qcyJdLCJuYW1lcyI6WyJhcGlVcmwiLCJIb21lIiwibW9kdWxlIiwiZXhwb3J0cyJdLCJtYXBwaW5ncyI6Ijs7QUFBQTtBQUNBLElBQU1BLFNBQVMsZ0NBQWY7QUFDQTtBQUNBLElBQU1DLE9BQU9ELFNBQVMsaUJBQXRCOztBQUVBRSxPQUFPQyxPQUFQLEdBQWtCO0FBQ2RGO0FBRGMsQ0FBbEIiLCJmaWxlIjoiYXBpLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8g5Li75Z+f5ZCNXHJcbmNvbnN0IGFwaVVybCA9IFwiaHR0cHM6Ly91dGVzdC5wbGF5b253ZWNoYXQuY29tXCJcclxuLy8g6aaW6aG15pWw5o2uXHJcbmNvbnN0IEhvbWUgPSBhcGlVcmwgKyAnL211c2ljL0FwcC9ob21lJ1xyXG5cclxubW9kdWxlLmV4cG9ydHMgID0ge1xyXG4gICAgSG9tZVxyXG59Il19

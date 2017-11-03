@@ -1,0 +1,41 @@
+
+  <view>
+      <view class="week">2222</view>
+      <view class="song_name">week</view>
+      <!-- 控制区 -->
+           <view class="option_btn">
+             <view class="collect">
+                 <image  wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"/>
+                 <image  wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"/>
+             </view>
+             <view class="prev" bindtap="prevMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"/>
+             </view>
+             <view class="play">
+                 <image wx:if="{{!musicStatus}}" bindtap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"/>
+                 <image wx:else bindtap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"/>
+             </view>
+             <view class="next" bindtap="nextMusic">
+                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"/>
+             </view>
+             <view class="cycle">
+                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"/>
+                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
+             </view>
+         </view>
+
+      <view class="song_list">
+           
+          <view class="title">排行榜</view>
+          <scroll-view>
+             <view class="song_view">
+                 <view class="song_item" wx:for="{{song}}">
+                     <view class="name">{{item.name}}</view><view>{{item.listen_num}}</view><view class="option">
+                         <image wx:if="{{!musicStatus}}" bindtap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"/>
+                 <image wx:else bindtap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"/>
+                     </view>
+                 </view>
+             </view>
+          </scroll-view>
+      </view>
+  </view>
