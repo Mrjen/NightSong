@@ -193,10 +193,10 @@
      <!-- 操作 -->
      <view class="option">
          <view class="date">{{todayWeek}}</view>
-         <view class="song_name">{{song.name}}</view>
+         <view class="song_name">{{song[0].name}}</view>
          <view class="option_btn">
              <view class="collect">
-                 <image  @tap="collectSong({{index}})" wx:if="{{song.collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
+                 <image  @tap="collectSong({{index}})" wx:if="{{song[0].collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
                  <image  @tap="discollectSong" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
              </view>
              <view class="prev" @tap="prevMusic">
@@ -219,10 +219,9 @@
                <!-- <view class="masked masked01"></view>
               <view class="masked masked02"></view> -->
               <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px);opacity:{{lycriesStatus}}">
-                 <view class="lycries" wx:for="{{song.word}}" wx:key="{{index}}">{{item}}</view>
+                 <view class="lycries" wx:for="{{song[0].word}}" wx:key="{{index}}">{{item}}</view>
               </view>
-
-              <view style="transform:translateY(-{{currentLycHeight/2}}px)">禾葡兰{{song.techerName}}老师，祝您晚安</view>
+              <view style="transform:translateY(-{{currentLycHeight/2}}px)">禾葡兰{{song.techerName}}老师:晚安</view>
            </view>
          <!-- 导航 -->
          <navigator class="nav nav_mycollect" url="collect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"></image></navigator>
@@ -237,6 +236,7 @@
 import wepy from "wepy";
 import myRequest from "../comm/wxRequest";
 import api from "../comm/api";
+import playMusic from '../comm/music'
 export default class Index extends wepy.page {
   config = {
     navigationBarTitleText: "一夜一曲",
@@ -419,25 +419,13 @@ export default class Index extends wepy.page {
     wx.myRequest({}, api.Home, function(res) {
       that.song = res.data;
       that.$apply();
-      wx.playBackgroundAudio({
-        dataUrl: res.data.audio,
-        title: res.data.name,
-        coverImgUrl: ""
-      });
-
-      wx.onBackgroundAudioStop(function(){
-          let song = that.song;
-          wx.playBackgroundAudio({
-            dataUrl: song.audio,
-            title: song.name,
-            coverImgUrl: ""
-          });
-      })
-
+      
+      playMusic.play(that.song,that.song,false,0)
+      wx.setStorageSync('oldList',that.song);
       wx.setStorageSync("currentSong", res.data);
 
       //  控制歌词
-      let lycLength = that.song.word.length; //获取歌词有多少句
+      let lycLength = that.song[0].word.length; //获取歌词有多少句
       let lycHeight = lycLength * 40; //获取歌词容器的高度
       getHeight(lycHeight, that);
       that.song = res.data;

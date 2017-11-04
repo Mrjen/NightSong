@@ -54,26 +54,26 @@ page {
         overflow: hidden;
         white-space: nowrap;
       }
-      view:nth-of-type(2){
-          font-size: 24rpx;
+      view:nth-of-type(2) {
+        font-size: 24rpx;
       }
       .option {
         width: 40rpx;
         height: 40rpx;
         margin-left: 20rpx;
         display: flex;
-        justify-content:center;
+        justify-content: center;
         align-items: center;
         image {
           width: 36rpx;
           height: 36rpx;
         }
       }
-      .delete{
-          width: 40rpx;
-          height: 40rpx;
-          background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAHlBMVEUAAAD///////////////////////////////////8kfJuVAAAACXRSTlMAEPDQMGCgUCC7NeMFAAAAaklEQVQoz2MYBQxiAjACARgtDSEEMmDRnCzAIDxTBVW700xDRstJDgzoSpsRChFKZyIUIpRCFKLZP9MQXQxo9czJAhgKJwWhKwW5EexWZAB2oxOaUnaQ1Sya01G1BzmA3BqAZhGEGAVYAQDeXxVFdrnW1gAAAABJRU5ErkJggg==');
-          background-size: 100% 100%;
+      .delete {
+        width: 40rpx;
+        height: 40rpx;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAHlBMVEUAAAD///////////////////////////////////8kfJuVAAAACXRSTlMAEPDQMGCgUCC7NeMFAAAAaklEQVQoz2MYBQxiAjACARgtDSEEMmDRnCzAIDxTBVW700xDRstJDgzoSpsRChFKZyIUIpRCFKLZP9MQXQxo9czJAhgKJwWhKwW5EexWZAB2oxOaUnaQ1Sya01G1BzmA3BqAZhGEGAVYAQDeXxVFdrnW1gAAAABJRU5ErkJggg==");
+        background-size: 100% 100%;
       }
     }
   }
@@ -99,19 +99,19 @@ page {
 <template>
   <view>
       <view class="week">{{todayWeek}}</view>
-      <view class="song_name">{{currentSong.name}}</view>
+      <view class="song_name">{{currentSong[0].name}}</view>
       <!-- 控制区 -->
            <view class="option_btn">
              <view class="collect">
-                 <!-- <image  @tap="collectSong" wx:if="{{currentSong.collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image> -->
-                 <image @tap="discollectSong({{currentSong.id}})" src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
+                 <image  @tap="collectSong" wx:if="{{currentSong[0].collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
+                 <image @tap="discollectSong({{currentSong[0].id}})" src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
              </view>
              <view class="prev" @tap="prevMusic">
                  <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"></image>
              </view>
              <view class="play">
-                 <image wx:if="{{currentSong.playing=='0'?true:false}}" @tap="audioPlay({{index}})" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
-                 <image wx:else  @tap="songPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
+                 <image wx:if="{{currentSong[0].playing=='0'?true:false}}" @tap="audioPlay()" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
+                 <image wx:else  @tap="audioPause()" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
              </view>
              <view class="next" @tap="nextMusic">
                  <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"></image>
@@ -148,79 +148,131 @@ import wepy from "wepy";
 import api from "../comm/api";
 import tip from "../comm/tip";
 import myRequest from "../comm/wxRequest";
+import playMusic from "../comm/music";
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: "收听排行榜",
+    navigationBarTitleText: "我的歌单",
     navigationBarBackgroundColor: "#21282e",
     navigationBarTextStyle: "#fff",
     disableScroll: true
   };
   data = {
     song: [],
-    currentSong:{}, //当前播放歌曲
-    todayWeek:""  //当前的星期英文单词
+    currentSong: {}, //当前播放歌曲
+    todayWeek: "", //当前的星期英文单词
+    songIndex: {
+      index: "",
+      list: ""
+    } //当前音乐播放的index,当前播放的属于列表
   };
 
   methods = {
-    audioPlay(e){
-       
+    // 页面列表播放歌曲
+    songPlay(idx) {
+      let that = this;
+      console.log(idx, "idx");
+      wx.setStorageSync("idx", idx);
+      let song = that.song;
+      let _song = that.song[idx];
+      playMusic.play(wx.getStorageSync("oldList"), song, true, idx);
+      for (let i = 0; i < song.length; i++) {
+        song[i].playing = 0;
+      }
+      that.currentSong = [_song];
+      that.song[idx].playing = 1;
+      that.songIndex = idx;
+      wx.setStorageSync('currentSong',[_song])
+      that.$apply();
     },
-    // 播放歌曲
-    songPlay(idx){
-        let that = this;
-       console.log(idx)
-       let _song = that.song[idx];
-       console.log(_song)
-        wx.playBackgroundAudio({
-            dataUrl:_song.audio,
-            title: _song.name,
-            coverImgUrl: ''
-        })
-        that.currentSong = _song;
-        that.song[idx].playing = 1;
-        that.$apply();
+    // 页面顶部歌曲播放
+    audioPlay() {
+      let that = this;
+      wx.getBackgroundAudioPlayerState({
+        success: function(res) {
+          if (res.status === 1) {
+            //歌曲正在播放，这个时候需要暂停播放
+            wx.pauseBackgroundAudio();
+          } else if (res.status === 0) {
+            //歌曲暂停，这个时候需要播放
+            playMusic.play( wx.getStorageSync("oldList"),[],false, wx.getStorageSync("idx"));
+            that.currentSong[0].playing = 1;
+            that.$apply();
+          }
+        },
+        fail() {
+          //当前没有歌曲播放  播放缓存的歌曲列表
+          playMusic.play(wx.getStorageSync("oldList"),[],false,wx.getStorageSync("idx"));
+          console.log(1111);
+          that.currentSong[0].playing = 1;
+          that.$apply();
+        }
+      });
     },
+
+    // 页面顶部暂停
+    audioPause() {
+      let that = this;
+      console.log("收藏的页面顶部暂停");
+      wx.pauseBackgroundAudio();
+      that.currentSong[0].playing = 0;
+      that.$apply();
+    },
+
     // 暂停播放
-    songPause(idx){
+    songPause(idx) {
+      console.log(idx, "idx");
+      let that = this;
+      idx = idx ? idx : that.songIndex;
+      if (idx) {
         this.song[idx].playing = 0;
-        wx.pauseBackgroundAudio();
-        this.$apply();
+      }
+      this.currentSong.playing = 0;
+      wx.pauseBackgroundAudio();
+      this.$apply();
     },
+
     // 取消收藏
-    discollectSong(id){
-        wx.myRequest({ id:id },api.disCollect, function(res) {
+    discollectSong(id) {
+      wx.myRequest({ id: id }, api.disCollect, function(res) {
         console.log(res);
         if (res.statusCode) {
-            tip.success("取消收藏成功")
+          tip.success("取消收藏成功");
         }
-      })
+      });
     }
   };
 
   onLoad() {
-      let that = this;
-      wx.getBackgroundAudioPlayerState({
-          success(res){
-              console.log(res)
-              if (res.status=='1') {
-                  that.currentSong.playing = 1;
-              }
-          }
-      });
-      that.todayWeek = wx.getStorageSync('todayWeek');
-      that.$apply();
+    let that = this;
+    that.todayWeek = wx.getStorageSync("todayWeek");
+    that.$apply();
   }
 
   onShow() {
     let that = this;
+    // 获取歌曲播放状态
+    console.log("that.currentSong",that.currentSong)
+    wx.getBackgroundAudioPlayerState({
+      success(res) {
+        console.log(res, "这里有没有执行");
+        if (res.status == "1") {
+          console.log(that.currentSong);
+          that.currentSong[0].playing = 1;
+        }
+      },
+      fail(res) {
+        //当前没有歌曲在播放
+      }
+    });
+
     wx.myRequest({ page: 0 }, api.myCollect, function(res) {
       that.song = res.data;
       that.$apply();
     });
-    let song = wx.getStorageSync("currentSong");
-    console.log(song);
-    if (song) {
-        that.currentSong = song;
+    let currentSong = wx.getStorageSync("currentSong");
+    console.log(currentSong);
+    if (currentSong) {
+      that.currentSong = currentSong;
     }
   }
 }

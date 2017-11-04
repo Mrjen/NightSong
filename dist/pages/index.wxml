@@ -34,10 +34,10 @@
      <!-- 操作 -->
      <view class="option">
          <view class="date">{{todayWeek}}</view>
-         <view class="song_name">{{song.name}}</view>
+         <view class="song_name">{{song[0].name}}</view>
          <view class="option_btn">
              <view class="collect">
-                 <image bindtap="collectSong" wx:if="{{song.collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png" data-wepy-params-a="{{index}}"/>
+                 <image bindtap="collectSong" wx:if="{{song[0].collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png" data-wepy-params-a="{{index}}"/>
                  <image bindtap="discollectSong" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"/>
              </view>
              <view class="prev" bindtap="prevMusic">
@@ -60,10 +60,9 @@
                <!-- <view class="masked masked01"></view>
               <view class="masked masked02"></view> -->
               <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px);opacity:{{lycriesStatus}}">
-                 <view class="lycries" wx:for="{{song.word}}" wx:key="{{index}}">{{item}}</view>
+                 <view class="lycries" wx:for="{{song[0].word}}" wx:key="{{index}}">{{item}}</view>
               </view>
-
-              <view style="transform:translateY(-{{currentLycHeight/2}}px)">禾葡兰{{song.techerName}}老师，祝您晚安</view>
+              <view style="transform:translateY(-{{currentLycHeight/2}}px)">禾葡兰{{song.techerName}}老师:晚安</view>
            </view>
          <!-- 导航 -->
          <navigator class="nav nav_mycollect" url="collect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"/></navigator>
