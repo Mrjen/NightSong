@@ -1,0 +1,47 @@
+<style>
+image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+<template>
+  <view>
+      <image src="{{image}}"></image>
+  </view>
+</template>
+
+<script>
+import wepy from "wepy";
+import myRequest from "../comm/wxRequest";
+import api from "../comm/api";
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: "一夜一曲",
+    navigationBarBackgroundColor: "#21282e",
+    navigationBarTextStyle: "#fff",
+    disableScroll: true
+  };
+  data = {
+    image: ""
+  };
+  onLoad() {
+    let image = "";
+    let that = this;
+    wx.myRequest({}, api.statAd, function(res) {
+      console.log(res);
+      that.image = res.data.image;
+      that.$apply();
+    });
+    setTimeout(function() {
+      wx.navigateTo({
+        url: '../pages/index'
+      });
+      wx.setStorageSync("navto", 0);
+    }, 3000);
+  }
+}
+</script>

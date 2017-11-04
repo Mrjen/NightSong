@@ -147,6 +147,10 @@
   bottom: 0;
 }
 
+.teacher{
+  padding-top: 80rpx;
+}
+
 @keyframes light {
   0%,
   100% {
@@ -221,7 +225,7 @@
               <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px);opacity:{{lycriesStatus}}">
                  <view class="lycries" wx:for="{{song[0].word}}" wx:key="{{index}}">{{item}}</view>
               </view>
-              <view style="transform:translateY(-{{currentLycHeight/2}}px)">禾葡兰{{song.techerName}}老师:晚安</view>
+              <view class="teacher" style="transform:translateY(-{{currentLycHeight/2}}px)">我是禾葡兰{{song[0].techerName}}老师:晚安</view>
            </view>
          <!-- 导航 -->
          <navigator class="nav nav_mycollect" url="collect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"></image></navigator>
@@ -296,7 +300,8 @@ export default class Index extends wepy.page {
     musicStatus: true,
     cycleSong: 1, //歌曲循环 1 列表循环  0 单曲循环
     song: {},
-    lycriesStatus:1 //歌词默认显示
+    lycriesStatus:1, //歌词默认显示,
+    navto: 1  //是否跳转启动页 1跳转 0 不跳转
   };
 
   components = {};
@@ -323,13 +328,14 @@ export default class Index extends wepy.page {
     // 收藏歌曲
     collectSong(index) {
       let that = this;
-      wx.myRequest({ id: this.song.id }, api.Collect, function(res) {
+
+      wx.myRequest({ id: that.song[0].id }, api.Collect, function(res) {
         console.log(res);
         if (res.statusCode == "200") {
-          let isCollect = that.song.collected;
+          let isCollect = that.song[0].collected;
           console.log(isCollect, "0000000");
           isCollect = isCollect == 1 ? 0 : 1;
-          that.song.collected = isCollect;
+          that.song[0].collected = isCollect;
           that.$apply();
         }
       });
@@ -337,13 +343,13 @@ export default class Index extends wepy.page {
     // 取消收藏
     discollectSong() {
       let that = this;
-      wx.myRequest({ id: this.song.id }, api.disCollect, function(res) {
+      wx.myRequest({ id: that.song[0].id }, api.disCollect, function(res) {
         console.log(res);
         if (res.statusCode == "200") {
-          let isCollect = that.song.collected;
+          let isCollect = that.song[0].collected;
           console.log(isCollect, "0000000");
           isCollect = isCollect == 1 ? 0 : 1;
-          that.song.collected = isCollect;
+          that.song[0].collected = isCollect;
           that.$apply();
         }
       });
@@ -358,6 +364,16 @@ export default class Index extends wepy.page {
 
   onShow() {
     console.log("show");
+    wx.getBackgroundAudioPlayerState({
+        success: function(res) {
+            var status = res.status
+            var dataUrl = res.dataUrl
+            var currentPosition = res.currentPosition
+            var duration = res.duration
+            var downloadPercent = res.downloadPercent
+
+        }
+    })
     let cycleSong =  wx.getStorageSync('cycleSong');
     if (cycleSong) {
       this.cycleSong = cycleSong;
@@ -369,6 +385,15 @@ export default class Index extends wepy.page {
     console.log("onLoad");
     let that = this;
     //  音乐
+    if (wx.getStorageSync("navto")) {
+          setTimeout(function() {
+              wx.navigateTo({
+                  url: '../pages/adpage'
+              })
+          },20)
+          wx.setStorageSync('navto',1)
+      }
+
     function getHeight(params, view) {
       let currentLycHeight = 0;
       let lycriesStatus = view.lycriesStatus;
@@ -432,5 +457,9 @@ export default class Index extends wepy.page {
       that.$apply();
     });
   }
+
+  onShareAppMessage: function() {
+
+    }
 }
 </script>

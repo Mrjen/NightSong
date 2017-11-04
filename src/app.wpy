@@ -13,9 +13,10 @@ import api from './comm/api'
 export default class extends wepy.app {
   config = {
     pages: [ 
+       "pages/adpage",
        "pages/index",
-      "pages/list",
-      
+       "pages/list",
+       
       'pages/collect'
      
       ],

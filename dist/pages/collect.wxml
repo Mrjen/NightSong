@@ -1,18 +1,18 @@
 
   <view>
       <view class="week">{{todayWeek}}</view>
-      <view class="song_name">{{currentSong[0].name}}</view>
+      <view class="song_name">{{currentSong.name}}</view>
       <!-- 控制区 -->
            <view class="option_btn">
              <view class="collect">
-                 <image bindtap="collectSong"  wx:if="{{currentSong[0].collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"/>
-                 <image bindtap="discollectSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png" data-wepy-params-a="{{currentSong[0].id}}"/>
+                 <image bindtap="collectSong"  wx:if="{{currentSong.collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png" data-wepy-params-a="{{currentSong.id}}"/>
+                 <image  wx:else bindtap="discollectSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png" data-wepy-params-a="{{currentSong.id}}"/>
              </view>
              <view class="prev" bindtap="prevMusic">
                  <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"/>
              </view>
              <view class="play">
-                 <image  wx:if="{{currentSong[0].playing=='0'?true:false}}" bindtap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png" data-wepy-params-a=""/>
+                 <image wx:if="{{currentSong.playing=='0'?true:false}}" bindtap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png" data-wepy-params-a=""/>
                  <image wx:else bindtap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png" data-wepy-params-a=""/>
              </view>
              <view class="next" bindtap="nextMusic">
@@ -20,7 +20,7 @@
              </view>
              <view class="cycle">
                  <image wx:if="{{cycleSong}}" bindtap="cycleSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"/>
-                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
+                 <image bindtap="cycleSong" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
              </view>
          </view>
 
@@ -29,15 +29,11 @@
           <view class="title">我的歌单</view>
           <scroll-view>
              <view class="song_view">
-                 <view class="song_item" wx:for="{{song}}">
+                 <view class="song_item" wx:for="{{song}}" bindtap="songPlay" data-wepy-params-a="{{index}}">
                          <view class="name">{{item.name}}</view>
-                         <view class="option">
-                             {{item.playing}}
-                             <image wx:if="{{item.playing=='0'?true:false}}" bindtap="songPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png" data-wepy-params-a="{{index}}"/>
-                             <image wx:else bindtap="songPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png" data-wepy-params-a="{{index}}"/>
-                        </view>
-                        <view class="delete" bindtap="discollectSong" data-wepy-params-a="{{item.id}}"/>
+                        <view class="delete" bindtap="deleteCollect" data-wepy-params-a="{{item.id}}" data-wepy-params-b="{{index}}"/>
                  </view>
+                 <!-- <view>您还没有收藏</view> -->
              </view>
           </scroll-view>
       </view>

@@ -1,8 +1,21 @@
-let play = function play(oldList, newList, changelist,idx) {
+let play = function play(oldList, newList, changelist,idx,cycleSong) {
                  //旧的播放列表   新的播放列表  ，是否切换播放列表 ，播放歌曲的index
     console.log(changelist);
     let i = idx?idx:0;
     if (changelist) {
+        if(cycleSong){
+            console.log("单曲循环")
+            wx.playBackgroundAudio({
+                dataUrl: oldList[i].audio,
+                title: oldList[i].name
+            });
+            wx.onBackgroundAudioStop(function(){
+                wx.playBackgroundAudio({
+                    dataUrl: oldList[i].audio,
+                    title: oldList[i].name
+                });
+            })
+        }else{
         wx.getBackgroundAudioPlayerState({
             success(res) {
                 console.log(res);
@@ -74,6 +87,7 @@ let play = function play(oldList, newList, changelist,idx) {
                 })
             }
         })
+     }
     } else {
         //默认播放列表第一首
         console.log("默认播放列表的第一首","idx",i);

@@ -81,45 +81,41 @@ page {
     }
   }
 }
+
 </style>
 
 <template>
   <view>
       <view class="week">{{todayWeek}}</view>
-      <view class="song_name">{{currentSong[0].name}}</view>
+      <view class="song_name">{{currentSong.name}}</view>
       <!-- 控制区 -->
            <view class="option_btn">
              <view class="collect">
-                 <image  @tap="collectSong({{currentSong[0].id}})" wx:if="{{currentSong[0].collected=='0'?true:false}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
-                 <image @tap="discollectSong({{currentSong[0].id}})" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
+                 <image  @tap="collectSong({{currentSong.id}})" wx:if="{{currentSong.collected=='0'?true:false}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
+                 <image @tap="discollectSong({{currentSong.id}})" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
              </view>
              <view class="prev" @tap="prevMusic">
                  <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"></image>
              </view>
              <view class="play">
-                 <image wx:if="{{currentSong[0].playing=='0'?true:false}}" @tap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
+                 <image wx:if="{{currentSong.playing=='0'?true:false}}" @tap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
                  <image wx:else  @tap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
              </view>
              <view class="next" @tap="nextMusic">
                  <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"></image>
              </view>
              <view class="cycle">
-                 <image wx:if="{{true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"></image>
-                 <image wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"></image>
+                 <image wx:if="{{songCycle}}"  @tap="cycleSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"></image>
+                 <image wx:else  @tap="cycleSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"></image>
              </view>
          </view>
 
       <view class="song_list">
-           
           <view class="title">排行榜</view>
           <scroll-view>
              <view class="song_view">
-                 <view class="song_item" wx:for="{{song}}" @tap="songPlay({{index}})">
-                     <view class="name">{{item.name}}</view><view>{{item.listen_num}}</view>
-                     <!-- <view class="option">
-                         <image wx:if="{{item.playing=='0'?true:false}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
-                         <image wx:else  @tap="songPause({{index}})" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
-                     </view> -->
+                 <view class="song_item" wx:for="{{song}}"  @tap="songPlay({{index}})">
+                     <view class="name">{{item.name}}</view><view>{{item.playTime}}次</view>
                  </view>
              </view>
           </scroll-view>
@@ -156,12 +152,12 @@ export default class Index extends wepy.page {
        let _song = that.song[idx];
        console.log(_song)
         _song.playing = 1;
-        that.currentSong = [_song];
+        that.currentSong = _song;
         for (let i = 0; i < song.length; i++) {
           song[i].playing = 0;
         }
         song[idx].playing = 1;
-        console.log("缓存当前播放的歌曲",[_song])
+        console.log("缓存当前播放的歌曲",_song)
         wx.setStorageSync('currentSong',[_song])
         that.$apply();
         let click = true;
@@ -175,12 +171,13 @@ export default class Index extends wepy.page {
       wx.getBackgroundAudioPlayerState({
         success: function(res) {
           if (res.status === 1) {
+            
             //歌曲正在播放，这个时候需要暂停播放
             wx.pauseBackgroundAudio();
           } else if (res.status === 0) {
             //歌曲暂停，这个时候需要播放
             playMusic.play( wx.getStorageSync("oldList"),[],false, wx.getStorageSync("idx"));
-            that.currentSong[0].playing = 1;
+            that.currentSong.playing = 1;
             that.$apply();
           }
         },
@@ -188,7 +185,7 @@ export default class Index extends wepy.page {
           //当前没有歌曲播放  播放缓存的歌曲列表
           playMusic.play(wx.getStorageSync("oldList"),[],false,wx.getStorageSync("idx"));
           console.log(1111);
-          that.currentSong[0].playing = 1;
+          that.currentSong.playing = 1;
           that.$apply();
         }
       });
@@ -200,7 +197,7 @@ export default class Index extends wepy.page {
       console.log("排行榜的页面顶部暂停");
       wx.pauseBackgroundAudio();
       console.log(that.currentSong)
-      that.currentSong[0].playing = 0;
+      that.currentSong.playing = 0;
       that.$apply();
     },
 
@@ -245,6 +242,13 @@ export default class Index extends wepy.page {
         }
       });
     },
+    // 切换歌曲循环模式
+    cycleSong(){
+      let that = this;
+      that.cycleSong = !that.cycleSong;
+      playMusic.play(wx.getStorageSync("oldList"),[],false,wx.getStorageSync("idx")+1,that.cycleSong);
+    },
+
     // 下一曲
     nextMusic(){
        playMusic.play(wx.getStorageSync("oldList"),[],false,wx.getStorageSync("idx")+1);
@@ -260,7 +264,7 @@ export default class Index extends wepy.page {
   onLoad() {
     let that = this;
       that.todayWeek = wx.getStorageSync('todayWeek');
-       
+      
   }
 
   onShow() {
@@ -271,8 +275,9 @@ export default class Index extends wepy.page {
           success(res){
               console.log('当前歌曲播放状态',res)
               if (res.status=='1') {
-                  that.currentSong[0].playing = 1;
+                  that.currentSong.playing = 1;
                   that.$apply();
+                  console.log("排行榜页面",that.data)
               }
           },
           fail(res){
@@ -288,7 +293,7 @@ export default class Index extends wepy.page {
     let song = wx.getStorageSync("currentSong");
     console.log(song);
     if (song) {
-        that.currentSong = song;
+        that.currentSong = song[0];
     }
     
   }

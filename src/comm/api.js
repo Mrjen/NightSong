@@ -13,6 +13,8 @@ const disCollect = apiUrl + '/music/App/disCollection'
 const myCollect = apiUrl + '/music/App/myCollection'
 // 收听排行榜
 const Ranking  = apiUrl + '/music/App/ranking'
+// 启动页广告
+const statAd = apiUrl + '/music/App/startAd'
 
 module.exports  = {
     Home,
@@ -20,5 +22,6 @@ module.exports  = {
     Collect,
     disCollect,
     myCollect,
-    Ranking
+    Ranking,
+    statAd
 }

@@ -62,7 +62,7 @@
               <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px);opacity:{{lycriesStatus}}">
                  <view class="lycries" wx:for="{{song[0].word}}" wx:key="{{index}}">{{item}}</view>
               </view>
-              <view style="transform:translateY(-{{currentLycHeight/2}}px)">禾葡兰{{song.techerName}}老师:晚安</view>
+              <view class="teacher" style="transform:translateY(-{{currentLycHeight/2}}px)">我是禾葡兰{{song[0].techerName}}老师:晚安</view>
            </view>
          <!-- 导航 -->
          <navigator class="nav nav_mycollect" url="collect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"/></navigator>
