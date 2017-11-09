@@ -2,7 +2,7 @@ wx.myRequest = function(data = {},url,cb) {
     const cookie = wx.getStorageSync('cookie');
     let extConfig = wx.getExtConfigSync ? wx.getExtConfigSync() : {}
     console.log("第三方平台数据默认350",extConfig);
-    data.kid = extConfig.kid?extConfig.kid:'412';
+    data.kid = extConfig.kid?extConfig.kid:'451';
     const requestOption = {
         url: url,
         data: data,

@@ -1,37 +1,41 @@
 
   <view>
-      <view class="week">{{todayWeek}}</view>
-      <view class="song_name">{{currentSong.name}}</view>
-      <!-- 控制区 -->
-           <view class="option_btn">
-             <view class="collect">
-                 <image bindtap="collectSong"  wx:if="{{currentSong.collected=='0'?true:false}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png" data-wepy-params-a="{{currentSong.id}}"/>
-                 <image bindtap="discollectSong"  wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png" data-wepy-params-a="{{currentSong.id}}"/>
-             </view>
-             <view class="prev" bindtap="prevMusic">
-                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"/>
-             </view>
-             <view class="play">
-                 <image wx:if="{{currentSong.playing=='0'?true:false}}" bindtap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"/>
-                 <image wx:else bindtap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"/>
-             </view>
-             <view class="next" bindtap="nextMusic">
-                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"/>
-             </view>
-             <view class="cycle">
-                 <image wx:if="{{songCycle}}" bindtap="cycleSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"/>
-                 <image wx:else bindtap="cycleSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
-             </view>
-         </view>
-
-      <view class="song_list">
-          <view class="title">排行榜</view>
-          <scroll-view>
-             <view class="song_view">
-                 <view class="song_item" wx:for="{{song}}" bindtap="songPlay" data-wepy-params-a="{{index}}">
-                     <view class="name">{{item.name}}</view><view>{{item.playTime}}次</view>
-                 </view>
-             </view>
-          </scroll-view>
+    <view class="week">{{todayWeek}}</view>
+    <view class="song_name">{{currentSong.name}}</view>
+    <!-- 控制区 -->
+    <view class="option_btn">
+      <view class="collect">
+        <image bindtap="collectSong"  wx:if="{{currentSong.collected=='0'?true:false}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png" data-wepy-params-a="{{currentSong.id}}"/>
+        <image bindtap="discollectSong"  wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png" data-wepy-params-a="{{currentSong.id}}"/>
       </view>
+      <view class="prev" bindtap="prevMusic">
+        <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"/>
+      </view>
+      <view class="play">
+        <image wx:if="{{currentSong.playing=='0'?true:false}}" bindtap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"/>
+        <image wx:else bindtap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"/>
+      </view>
+      <view class="next" bindtap="nextMusic">
+        <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"/>
+      </view>
+      <view class="cycle">
+        <image wx:if="{{songCycle}}" bindtap="cycleSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"/>
+        <image wx:else bindtap="cycleSong" src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"/>
+      </view>
+    </view>
+    <view class="song_list">
+      <view class="title">排行榜</view>
+      <scroll-view scroll-y="true">
+        <view class="song_view">
+          <view class="song_item" wx:for="{{song}}" bindtap="songPlay" data-wepy-params-a="{{index}}">
+            <view class="name">{{item.name}}</view>
+            <view>{{item.playTime}}次</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="share_view">
+      <view>分享排行榜歌曲给好友听</view>
+      <button class="share" open-type="share"/>
+    </view>
   </view>

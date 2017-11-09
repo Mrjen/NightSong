@@ -13,12 +13,10 @@ import api from './comm/api'
 export default class extends wepy.app {
   config = {
     pages: [ 
-       "pages/adpage",
-       "pages/index",
-       "pages/list",
-       
-      'pages/collect'
-     
+      "pages/index",
+      'pages/collect',
+      "pages/list",
+       "pages/adpage"
       ],
     window: {
       navigationBarTitleText: "一夜一曲",
@@ -38,9 +36,11 @@ export default class extends wepy.app {
 
   onLaunch() {
     this.testAsync("onLaunch");
+    let extConfig = wx.getExtConfigSync ? wx.getExtConfigSync() : {}
+    let kid = extConfig.kid?extConfig.kid:'451';
     wepy.login({
       success(res) {
-        wx.myRequest({code:res.code}, api.auth, function(res) {
+        wx.myRequest({code:res.code,kid:kid}, api.auth, function(res) {
           console.log("授权成功")
         });
       }

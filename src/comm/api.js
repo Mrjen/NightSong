@@ -15,13 +15,22 @@ const myCollect = apiUrl + '/music/App/myCollection'
 const Ranking  = apiUrl + '/music/App/ranking'
 // 启动页广告
 const statAd = apiUrl + '/music/App/startAd'
+// 分享二维码
+const shareCode = apiUrl + '/music/App/shareQrcode'
+// 用户类型
+const userType = apiUrl + '/music/App/updateUserType'
+// 统计歌曲
+const songPlayCount = apiUrl + '/music/App/play'
 
-module.exports  = {
+module.exports = {
     Home,
     auth,
     Collect,
     disCollect,
     myCollect,
     Ranking,
-    statAd
+    statAd,
+    shareCode,
+    userType,
+    songPlayCount
 }

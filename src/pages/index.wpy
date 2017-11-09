@@ -1,465 +1,610 @@
 <style lang="less">
-.container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  .bg_list,
-  .bg_item {
-    width: 100%;
-    height: 100%;
-  }
-  .bg_item {
-    background-size: 100% 100%;
-    .page_icon {
-      width: 180rpx;
-      height: 147rpx;
-      position: relative;
-      left: 50%;
-      margin-left: -90rpx;
-      margin-top: 96rpx;
-    }
-
-    .light01 {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      animation: light 2s infinite;
-    }
-  }
-  .bg_item2 .page_icon {
-    width: 155rpx;
-    height: 151rpx;
-  }
-  .bg_item3 .page_icon {
-    width: 161rpx;
-    height: 161rpx;
-  }
-  .bg_item4 .page_icon {
-    width: 168rpx;
-    height: 180rpx;
-  }
-  .bg_item5 .page_icon {
-    width: 148rpx;
-    height: 159rpx;
-  }
-  .bg_item6 .page_icon {
-    width: 156rpx;
-    height: 160rpx;
-  }
-  .bg_item7 .page_icon {
-    width: 179rpx;
-    height: 184rpx;
-  }
-
-  .option {
+  .container {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    padding-top: 326rpx;
-    text-align: center;
-    color: #fff;
-    font-size: 24rpx;
-    .date {
-      font-size: 24rpx;
-      margin-bottom: 34rpx;
-    }
-    .song_name {
-      margin-bottom: 50rpx;
-    }
-    .option_btn {
-      display: flex;
-      justify-content: space-between;
+    .bg_list,
+    .bg_item {
       width: 100%;
-      padding: 0 150rpx;
-      margin-bottom: 70rpx;
-      view {
-        width: 40rpx;
-        height: 40rpx;
-        image {
-          display: block;
+      height: 100%;
+    }
+    .bg_item {
+      background-size: 100% 100%;
+      .page_icon {
+        width: 180rpx;
+        height: 147rpx;
+        position: relative;
+        left: 50%;
+        margin-left: -90rpx;
+        margin-top: 96rpx;
+      }
+      .light01 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        animation: light 2s infinite;
+      }
+    }
+    .bg_item2 .page_icon {
+      width: 155rpx;
+      height: 151rpx;
+    }
+    .bg_item3 .page_icon {
+      width: 161rpx;
+      height: 161rpx;
+    }
+    .bg_item4 .page_icon {
+      width: 168rpx;
+      height: 180rpx;
+    }
+    .bg_item5 .page_icon {
+      width: 148rpx;
+      height: 159rpx;
+    }
+    .bg_item6 .page_icon {
+      width: 156rpx;
+      height: 160rpx;
+    }
+    .bg_item7 .page_icon {
+      width: 179rpx;
+      height: 184rpx;
+    }
+    .option {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      padding-top: 326rpx;
+      text-align: center;
+      color: #fff;
+      font-size: 24rpx;
+      .date {
+        font-size: 24rpx;
+        margin-bottom: 34rpx;
+      }
+      .song_name {
+        margin-bottom: 50rpx;
+      }
+      .option_btn {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 150rpx;
+        margin-bottom: 70rpx;
+        view {
           width: 40rpx;
           height: 40rpx;
+          image {
+            display: block;
+            width: 40rpx;
+            height: 40rpx;
+          }
+        }
+      }
+      .nav {
+        width: 90rpx;
+        height: 80rpx;
+        position: fixed;
+        image {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .nav_mycollect {
+        right: 150rpx;
+        bottom: 40rpx;
+      }
+      .nav_list {
+        right: 40rpx;
+        bottom: 40rpx;
+      }
+      .share_btn {
+        right: 260rpx;
+        bottom: 40rpx;
+      }
+      .lycries_view {
+        width: 750rpx;
+        height: 450rpx; // border:1px solid red;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        .masked {
+          height: 225rpx;
+          position: absolute;
+          width: 100%;
+        }
+        .masked01 {
+          left: 0;
+          top: 0;
+          background-color: rgba(255, 255, 255, 0.2); // background-size: 750rpx 1221rpx;
+          // filter: blur(100px);
+        }
+        .masked02 {
+          left: 0;
+          bottom: 0;
+        }
+        .lycries {
+          height: 40rpx;
+          line-height: 40rpx;
+          border: 1px solid transparent;
+          color: rgba(255, 255, 255, 0.8);
         }
       }
     }
-    .nav {
-      width: 90rpx;
-      height: 80rpx;
-      position: fixed;
-      image {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
+  }
+  .myAudio {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+  .teacher {
+    padding-top: 80rpx;
+  }
+  @keyframes light {
+    0%,
+    100% {
+      opacity: 0.3;
     }
-    .nav_mycollect {
-      right: 150rpx;
-      bottom: 40rpx;
-    }
-    .nav_list {
-      right: 40rpx;
-      bottom: 40rpx;
-    }
-    .lycries_view {
-      width: 750rpx;
-      height: 450rpx;
-      // border:1px solid red;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-      .masked {
-        height: 225rpx;
-        position: absolute;
-        width: 100%;
-      }
-      .masked01 {
-        left: 0;
-        top: 0;
-        background-color: rgba(255, 255, 255, 0.2);
-        // background-size: 750rpx 1221rpx;
-        // filter: blur(100px);
-      }
-      .masked02 {
-        left: 0;
-        bottom: 0;
-      }
-      .lycries {
-        height: 40rpx;
-        line-height: 40rpx;
-        border: 1px solid transparent;
-        color: rgba(255, 255, 255, 0.8);
-      }
+    50% {
+      opacity: 1;
     }
   }
-}
-.myAudio {
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-}
-
-.teacher{
-  padding-top: 80rpx;
-}
-
-@keyframes light {
-  0%,
-  100% {
-    opacity: 0.3;
+  .lycries_container {
+    margin-top: 300rpx;
   }
-  50% {
-    opacity: 1;
+  .adpage {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    image {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
   }
-}
 </style>
 <template>
   <view class='container'>
     <!-- 页面背景   这里为啥不用循环？？？？我也很无奈啊 -->
-     <view class='bg_list'>
-         <view class="bg_item bg_item1"  wx:if="{{today===0}}" style="background-image:url({{bgList[0].image}})">
-            <image class="page_icon" src="{{bgList[0].icon}}"></image> 
-            <image class="light01" src="{{bgList[0].light}}"></image> 
-         </view>
-         <view class="bg_item bg_item2"  wx:if="{{today===1}}" style="background-image:url({{bgList[1].image}})">
-            <image class="page_icon" src="{{bgList[1].icon}}"></image> 
-            <image class="light01" src="{{bgList[1].light}}"></image> 
-         </view>
-         <view class="bg_item bg_item3"  wx:if="{{today===2}}" style="background-image:url({{bgList[2].image}})">
-            <image class="page_icon" src="{{bgList[2].icon}}"></image> 
-            <image class="light01" src="{{bgList[2].light}}"></image> 
-         </view>
-         <view class="bg_item bg_item4"  wx:if="{{today===3}}" style="background-image:url({{bgList[3].image}})">
-            <image class="page_icon" src="{{bgList[3].icon}}"></image> 
-            <image class="light01" src="{{bgList[3].light}}"></image> 
-         </view>
-         <view class="bg_item bg_item5"  wx:if="{{today===4}}" style="background-image:url({{bgList[4].image}})">
-            <image class="page_icon" src="{{bgList[4].icon}}"></image> 
-            <image class="light01" src="{{bgList[4].light}}"></image> 
-         </view>
-         <view class="bg_item bg_item6"  wx:if="{{today===5}}" style="background-image:url({{bgList[5].image}})">
-            <image class="page_icon" src="{{bgList[5].icon}}"></image> 
-            <image class="light01" src="{{bgList[5].light}}"></image> 
-         </view>
-         <view class="bg_item bg_item7"  wx:if="{{today===6}}" style="background-image:url({{bgList[6].image}})">
-            <image class="page_icon" src="{{bgList[6].icon}}"></image> 
-            <image class="light01" src="{{bgList[6].light}}"></image> 
-         </view>
-     </view>
-     <!-- 操作 -->
-     <view class="option">
-         <view class="date">{{todayWeek}}</view>
-         <view class="song_name">{{song[0].name}}</view>
-         <view class="option_btn">
-             <view class="collect">
-                 <image  @tap="collectSong({{index}})" wx:if="{{song[0].collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
-                 <image  @tap="discollectSong" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
-             </view>
-             <view class="prev" @tap="prevMusic">
-                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"></image>
-             </view>
-             <view class="play">
-                 <image wx:if="{{!musicStatus}}" @tap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
-                 <image wx:else  @tap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
-             </view>
-             <view class="next" @tap="nextMusic">
-                 <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"></image>
-             </view>
-             <view class="cycle">
-                 <image wx:if="{{cycleSong==1?true:false}}" @tap="cycleSont" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"></image>
-                 <image  @tap="cycleSont" wx:if="{{cycleSong==1?false:true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"></image>
-             </view>
-         </view>
-         <!-- 歌词 -->
-           <view class="lycries_view">
-               <!-- <view class="masked masked01"></view>
-              <view class="masked masked02"></view> -->
-              <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px);opacity:{{lycriesStatus}}">
-                 <view class="lycries" wx:for="{{song[0].word}}" wx:key="{{index}}">{{item}}</view>
-              </view>
-              <view class="teacher" style="transform:translateY(-{{currentLycHeight/2}}px)">我是禾葡兰{{song[0].techerName}}老师:晚安</view>
-           </view>
-         <!-- 导航 -->
-         <navigator class="nav nav_mycollect" url="collect"><image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"></image></navigator>
-         <navigator class="nav nav_list" url="list"><image src="https://qncdn.playonwechat.com/NightSong/list_icon.png"></image></navigator>
-     </view>
+    <view class='bg_list'>
+      <view class="bg_item bg_item1" wx:if="{{today===0}}" style="background-image:url({{bgList[0].image}})">
+        <image class="page_icon" src="{{bgList[0].icon}}"></image>
+        <image class="light01" src="{{bgList[0].light}}"></image>
+      </view>
+      <view class="bg_item bg_item2" wx:if="{{today===1}}" style="background-image:url({{bgList[1].image}})">
+        <image class="page_icon" src="{{bgList[1].icon}}"></image>
+        <image class="light01" src="{{bgList[1].light}}"></image>
+      </view>
+      <view class="bg_item bg_item3" wx:if="{{today===2}}" style="background-image:url({{bgList[2].image}})">
+        <image class="page_icon" src="{{bgList[2].icon}}"></image>
+        <image class="light01" src="{{bgList[2].light}}"></image>
+      </view>
+      <view class="bg_item bg_item4" wx:if="{{today===3}}" style="background-image:url({{bgList[3].image}})">
+        <image class="page_icon" src="{{bgList[3].icon}}"></image>
+        <image class="light01" src="{{bgList[3].light}}"></image>
+      </view>
+      <view class="bg_item bg_item5" wx:if="{{today===4}}" style="background-image:url({{bgList[4].image}})">
+        <image class="page_icon" src="{{bgList[4].icon}}"></image>
+        <image class="light01" src="{{bgList[4].light}}"></image>
+      </view>
+      <view class="bg_item bg_item6" wx:if="{{today===5}}" style="background-image:url({{bgList[5].image}})">
+        <image class="page_icon" src="{{bgList[5].icon}}"></image>
+        <image class="light01" src="{{bgList[5].light}}"></image>
+      </view>
+      <view class="bg_item bg_item7" wx:if="{{today===6}}" style="background-image:url({{bgList[6].image}})">
+        <image class="page_icon" src="{{bgList[6].icon}}"></image>
+        <image class="light01" src="{{bgList[6].light}}"></image>
+      </view>
+    </view>
+    <!-- 操作 -->
+    <view class="option">
+      <view class="date">{{todayWeek}}</view>
+      <view class="song_name">{{currentSong.name}}</view>
+      <view class="option_btn">
+        <view class="collect">
+          <image @tap="collectSong({{index}})" wx:if="{{song[0].collected=='0'}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_collect.png"></image>
+          <image @tap="discollectSong" wx:else src="https://qncdn.playonwechat.com/NightSong/index__icon_has_collect.png"></image>
+        </view>
+        <view class="prev" @tap="prevMusic">
+          <image src="https://qncdn.playonwechat.com/NightSong/index__icon_prev_song.png"></image>
+        </view>
+        <view class="play">
+          <image wx:if="{{!musicStatus}}" @tap="audioPlay" src="https://qncdn.playonwechat.com/NightSong/index__icon_play.png"></image>
+          <image wx:else @tap="audioPause" src="https://qncdn.playonwechat.com/NightSong/index__icon_play_pause.png"></image>
+        </view>
+        <view class="next" @tap="nextMusic">
+          <image src="https://qncdn.playonwechat.com/NightSong/index__icon_next_song.png"></image>
+        </view>
+        <view class="cycle">
+          <image wx:if="{{cycleSong==1?true:false}}" @tap="cycleSont" src="https://qncdn.playonwechat.com/NightSong/index__icon_list_cycle.png"></image>
+          <image @tap="cycleSont" wx:if="{{cycleSong==1?false:true}}" src="https://qncdn.playonwechat.com/NightSong/index__icon_one_cycle.png"></image>
+        </view>
+      </view>
+      <!-- 歌词 -->
+      <view class="lycries_view">
+        <!-- <view class="masked masked01"></view>
+                  <view class="masked masked02"></view> -->
+        <view class="lycries_container" style="transform:translateY(-{{currentLycHeight/2}}px);opacity:{{lycriesStatus}}">
+           <view class="lycries" wx:for="{{currentSong.word}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+        <view class="teacher" style="transform:translateY(-{{currentLycHeight/2}}px)">{{song[0].teacherName}}</view>
+      </view>
+      <!-- 导航 -->
+      <navigator class="nav nav_mycollect" url="collect">
+        <image src="https://qncdn.playonwechat.com/NightSong/mine_icon.png"></image>
+      </navigator>
+      <navigator class="nav nav_list" url="list">
+        <image src="https://qncdn.playonwechat.com/NightSong/list_icon.png"></image>
+      </navigator>
+      <view class="nav share_btn" @tap="sharePoster">
+        <image src="https://qncdn.playonwechat.com/NightSong/share_icon.png"></image>
+      </view>
+    </view>
     <audio class="myAudio" name="{{name}}" src="{{song.crc}}" id="myAudio" loop></audio>
-
+    <!-- 页面广告 -->
+    <view class="adpage" wx:if="{{ADshow}}">
+      <image src="{{image}}"></image>
+    </view>
   </view>
 </template>
 
 <script>
-import wepy from "wepy";
-import myRequest from "../comm/wxRequest";
-import api from "../comm/api";
-import playMusic from '../comm/music'
-export default class Index extends wepy.page {
-  config = {
-    navigationBarTitleText: "一夜一曲",
-    navigationBarBackgroundColor: "#21282e",
-    navigationBarTextStyle: "#fff",
-    disableScroll: true
-  };
-
-  data = {
-    bgList: [
-      {
-        image: "https://qncdn.playonwechat.com/NightSong/night_bg01.png",
-        icon: "https://qncdn.playonwechat.com/NightSong/night_bg01_hearts.png",
-        light: "https://qncdn.playonwechat.com/NightSong/night_bg01_light.png",
-        id: 0
-      },
-      {
-        image: "https://qncdn.playonwechat.com/NightSong/night_bg02.png",
-        icon: "https://qncdn.playonwechat.com/NightSong/night_bg02_hearts.png",
-        light: "https://qncdn.playonwechat.com/NightSong/night_bg02_light.png",
-        id: 1
-      },
-      {
-        image: "https://qncdn.playonwechat.com/NightSong/night_bg03.png",
-        icon: "https://qncdn.playonwechat.com/NightSong/night_bg03_hearts.png",
-        light: "https://qncdn.playonwechat.com/NightSong/night_bg03_light.png",
-        id: 2
-      },
-      {
-        image: "https://qncdn.playonwechat.com/NightSong/night_bg04.png",
-        icon: "https://qncdn.playonwechat.com/NightSong/night_bg04_hearts.png",
-        light: "https://qncdn.playonwechat.com/NightSong/night_bg04_light.png",
-        id: 3
-      },
-      {
-        image: "https://qncdn.playonwechat.com/NightSong/night_bg05.png",
-        icon: "https://qncdn.playonwechat.com/NightSong/night_bg05_hearts.png",
-        light: "https://qncdn.playonwechat.com/NightSong/night_bg05_light.png",
-        id: 4
-      },
-      {
-        image: "https://qncdn.playonwechat.com/NightSong/night_bg06.png",
-        icon: "https://qncdn.playonwechat.com/NightSong/night_bg06_hearts.png",
-        light: "https://qncdn.playonwechat.com/NightSong/night_bg06_light.png",
-        id: 5
-      },
-      {
-        image: "https://qncdn.playonwechat.com/NightSong/night_bg07.png",
-        icon: "https://qncdn.playonwechat.com/NightSong/night_bg07_hearts.png",
-        light: "https://qncdn.playonwechat.com/NightSong/night_bg07_light.png",
-        id: 6
-      }
-    ],
-    today: 1, //今天是星期几
-    todayWeek: "", //星期几英文
-    currentLycHeight: 0, //当前歌词滚动高度
-    musicStatus: true,
-    cycleSong: 1, //歌曲循环 1 列表循环  0 单曲循环
-    song: {},
-    lycriesStatus:1, //歌词默认显示,
-    navto: 1  //是否跳转启动页 1跳转 0 不跳转
-  };
-
-  components = {};
-
-  methods = {
-    audioPlay: function() {
-      let that = this;
-      let song = that.song;
-      wx.playBackgroundAudio({
-        dataUrl: song.audio,
-        title: song.name,
-        coverImgUrl: ''
-      })
-      this.musicStatus = !this.musicStatus;
-      this.$apply();
-    },
-
-    audioPause: function() {
-      wx.pauseBackgroundAudio();
-      this.musicStatus = !this.musicStatus;
-      this.$apply();
-    },
-
-    // 收藏歌曲
-    collectSong(index) {
-      let that = this;
-
-      wx.myRequest({ id: that.song[0].id }, api.Collect, function(res) {
-        console.log(res);
-        if (res.statusCode == "200") {
-          let isCollect = that.song[0].collected;
-          console.log(isCollect, "0000000");
-          isCollect = isCollect == 1 ? 0 : 1;
-          that.song[0].collected = isCollect;
-          that.$apply();
+  import wepy from "wepy"
+  import myRequest from "../comm/wxRequest"
+  import api from "../comm/api"
+  import playMusic from "../comm/music"
+  import getInfo from '../comm/getUserInfo'
+  import tip from '../comm/tip'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarBackgroundColor: "#21282e",
+      navigationBarTextStyle: "#fff",
+      disableScroll: true
+    };
+    data = {
+      bgList: [{
+          image: "https://qncdn.playonwechat.com/NightSong/night_bg01.png",
+          icon: "https://qncdn.playonwechat.com/NightSong/night_bg01_hearts.png",
+          light: "https://qncdn.playonwechat.com/NightSong/night_bg01_light.png",
+          id: 0
+        },
+        {
+          image: "https://qncdn.playonwechat.com/NightSong/night_bg02.png",
+          icon: "https://qncdn.playonwechat.com/NightSong/night_bg02_hearts.png",
+          light: "https://qncdn.playonwechat.com/NightSong/night_bg02_light.png",
+          id: 1
+        },
+        {
+          image: "https://qncdn.playonwechat.com/NightSong/night_bg03.png",
+          icon: "https://qncdn.playonwechat.com/NightSong/night_bg03_hearts.png",
+          light: "https://qncdn.playonwechat.com/NightSong/night_bg03_light.png",
+          id: 2
+        },
+        {
+          image: "https://qncdn.playonwechat.com/NightSong/night_bg04.png",
+          icon: "https://qncdn.playonwechat.com/NightSong/night_bg04_hearts.png",
+          light: "https://qncdn.playonwechat.com/NightSong/night_bg04_light.png",
+          id: 3
+        },
+        {
+          image: "https://qncdn.playonwechat.com/NightSong/night_bg05.png",
+          icon: "https://qncdn.playonwechat.com/NightSong/night_bg05_hearts.png",
+          light: "https://qncdn.playonwechat.com/NightSong/night_bg05_light.png",
+          id: 4
+        },
+        {
+          image: "https://qncdn.playonwechat.com/NightSong/night_bg06.png",
+          icon: "https://qncdn.playonwechat.com/NightSong/night_bg06_hearts.png",
+          light: "https://qncdn.playonwechat.com/NightSong/night_bg06_light.png",
+          id: 5
+        },
+        {
+          image: "https://qncdn.playonwechat.com/NightSong/night_bg07.png",
+          icon: "https://qncdn.playonwechat.com/NightSong/night_bg07_hearts.png",
+          light: "https://qncdn.playonwechat.com/NightSong/night_bg07_light.png",
+          id: 6
         }
-      });
-    },
-    // 取消收藏
-    discollectSong() {
-      let that = this;
-      wx.myRequest({ id: that.song[0].id }, api.disCollect, function(res) {
-        console.log(res);
-        if (res.statusCode == "200") {
-          let isCollect = that.song[0].collected;
-          console.log(isCollect, "0000000");
-          isCollect = isCollect == 1 ? 0 : 1;
-          that.song[0].collected = isCollect;
-          that.$apply();
-        }
-      });
-    },
-    // 是否单曲循环
-    cycleSont() {
-      this.cycleSong = this.cycleSong==1?0:1;
-      this.$apply();
-      wx.setStorageSync('cycleSong',this.cycleSong)
-    }
-  };
-
-  onShow() {
-    console.log("show");
-    wx.getBackgroundAudioPlayerState({
-        success: function(res) {
-            var status = res.status
-            var dataUrl = res.dataUrl
-            var currentPosition = res.currentPosition
-            var duration = res.duration
-            var downloadPercent = res.downloadPercent
-
-        }
-    })
-    let cycleSong =  wx.getStorageSync('cycleSong');
-    if (cycleSong) {
-      this.cycleSong = cycleSong;
-      this.$apply();
-    }
-  }
-
-  onLoad() {
-    console.log("onLoad");
-    let that = this;
-    //  音乐
-    if (wx.getStorageSync("navto")) {
-          setTimeout(function() {
-              wx.navigateTo({
-                  url: '../pages/adpage'
+      ],
+      today: 1, //今天是星期几
+      todayWeek: "", //星期几英文
+      currentLycHeight: 0, //当前歌词滚动高度
+      musicStatus: true,
+      cycleSong: true, //歌曲循环 1 列表循环  0 单曲循环
+      song: {},
+      lycriesStatus: 1, //歌词默认显示,
+      ADshow: true, //首页广告默认显示
+      image: "",
+      currentSong:{},
+      time:""   //歌词计时器
+    };
+    components = {};
+    methods = {
+      audioPlay: function() {
+        let that = this;
+        let song = that.song;
+        wx.playBackgroundAudio({
+          dataUrl: song.audio,
+          title: song.name,
+          coverImgUrl: ""
+        });
+        this.musicStatus = !this.musicStatus;
+        this.$apply();
+      },
+      audioPause: function() {
+        wx.pauseBackgroundAudio();
+        this.musicStatus = !this.musicStatus;
+        this.$apply();
+      },
+      // 收藏歌曲
+      collectSong(index) {
+        let that = this;
+        wx.myRequest({
+          id: that.song[0].id
+        }, api.Collect, function(res) {
+          console.log(res);
+          if (res.statusCode == "200") {
+            let isCollect = that.song[0].collected;
+            isCollect = isCollect == 1 ? 0 : 1;
+            that.song[0].collected = isCollect;
+            that.$apply();
+          }
+        });
+      },
+      // 取消收藏
+      discollectSong() {
+        let that = this;
+        wx.myRequest({
+          id: that.song[0].id
+        }, api.disCollect, function(res) {
+          console.log(res);
+          if (res.statusCode == "200") {
+            let isCollect = that.song[0].collected;
+            isCollect = isCollect == 1 ? 0 : 1;
+            that.song[0].collected = isCollect;
+            that.$apply();
+          }
+        });
+      },
+      // 是否单曲循环
+      cycleSont() {
+        this.cycleSong = this.cycleSong == 1 ? 0 : 1;
+        this.$apply();
+        wx.setStorageSync("cycleSong", this.cycleSong);
+      },
+      // 分享海报
+      sharePoster() {
+        let that = this;
+        // let teacher = that.teacher;
+        getInfo.getInfo(function(res) {
+          let userInfo = res.userInfo;
+          if (!userInfo) {
+            return false;
+          }
+          let _avatarUrl = userInfo.avatarUrl;
+          let word = [that.song[0].word[0], that.song[0].word[1]];
+          let musicName = that.song[0].name;
+          console.log(word, musicName);
+          wx.myRequest({
+              word: word,
+              musicName: musicName,
+              avatarUrl:_avatarUrl
+            },
+            api.shareCode,
+            function(res) {
+              console.log(res.data);
+              let src = res.data.src;
+              wx.downloadFile({
+                url: res.data.src,
+                success: function(res) {
+                  //console.log(res);
+                  tip.loading();
+                  let _image = res.tempFilePath;
+                  wx.saveImageToPhotosAlbum({
+                    filePath: _image,
+                    success(res) {
+                      console.log(res);
+                      tip.loaded();
+                      wx.showToast({
+                        title: '海报下载成功，请去相册查看',
+                        icon: 'success',
+                        duration: 800
+                      });
+                      wx.previewImage({
+                        current: src,
+                        urls: [src]
+                      })
+                    },
+                    fail() {
+                      tip.loaded();
+                      wx.showModal({
+                        title: '提示',
+                        content: '系统无法保存图片到您的相册，是否去开启权限',
+                        success: function(res) {
+                          if (res.confirm) {
+                            wx.openSetting({
+                              success: (res) => {
+                                wx.getSetting({
+                                  success: (res) => {
+                                    if (res.authSetting['scope.writePhotosAlbum']) {
+                                      wx.saveImageToPhotosAlbum({
+                                        filePath: _image,
+                                        success(res) {
+                                          console.log(res);
+                                          wx.showToast({
+                                            title: '海报下载成功，请去相册查看',
+                                            icon: 'success',
+                                            duration: 800
+                                          })
+                                        }
+                                      })
+                                    }
+                                  }
+                                })
+                              }
+                            })
+                          } else if (res.cancel) {
+                            console.log('用户点击取消')
+                          }
+                        }
+                      })
+                    }
+                  })
+                }
               })
-          },20)
-          wx.setStorageSync('navto',1)
-      }
+            }
+          )
+        })
+      },
 
-    function getHeight(params, view) {
-      let currentLycHeight = 0;
+    };
+    onShow() {
+      console.log("show");
+      let that = this;
+      wx.getBackgroundAudioPlayerState({
+        success: function(res) {
+          console.log(res,"这里是别的页面回来的歌曲播放状态")
+          let status = res.status;
+          let dataUrl = res.dataUrl;
+          let currentPosition = res.currentPosition;
+          let duration = res.duration;
+          let _scale = currentPosition/duration;
+              console.log(_scale,"_scale_scale_scale_scale")
+          if (status===1) {
+             that.currentSong = wx.getStorageSync('currentSong');
+             that.$apply();
+             clearInterval(that.time);
+             that.getHeight(wx.getStorageSync('currentSong'),that,_scale);
+          }
+        }
+      });
+      let cycleSong = wx.getStorageSync("cycleSong");
+      if (cycleSong) {
+        this.cycleSong = cycleSong;
+        this.$apply();
+      }
+    }
+    getHeight(params, view,scale) {
+      // params当前播放歌曲对象, view页面this对象, scale歌曲长度s跟歌词行数总高度h的比例
+      let that = this;
+      let lycHeight = params.word.length*40 + 354;
+      // let currentLycHeight = 0;
       let lycriesStatus = view.lycriesStatus;
-      let _height = 0;
+      let _height = lycHeight*scale?lycHeight*scale:0;
       let data = {};
+      clearInterval(that.time);
       let time = setInterval(() => {
         // console.log(_height);
-        if (_height < params) {
-          _height += 2;
+        if (_height < lycHeight) {
+          _height = _height + 1;
           lycriesStatus = 1;
         } else {
           clearInterval(time);
-          _height = params;
+          _height = lycHeight;
           lycriesStatus = 0;
         }
         view.currentLycHeight = _height;
         view.lycriesStatus = lycriesStatus;
         view.$apply();
-      },30);
-    }
-
-    // 获取今天是星期几
-    let mydate = new Date();
-    let today = mydate.getDay();
-    console.log(today);
-    this.today = today;
-    let todayWeek = "";
-    if (this.today == "0") {
-      todayWeek = "Sunday";
-    } else if (this.today == "1") {
-      todayWeek = "Monday";
-    } else if (this.today == "2") {
-      todayWeek = "Tuesday";
-    } else if (this.today == "3") {
-      todayWeek = "Wednesday";
-    } else if (this.today == "4") {
-      todayWeek = "Thursday";
-    } else if (this.today == "5") {
-      todayWeek = "Friday";
-    } else if (this.today == "6") {
-      todayWeek = "Saturday";
-    }
-    wx.setStorageSync("todayWeek", todayWeek);
-    this.todayWeek = todayWeek;
-    this.$apply();
-
-    // 获取首页数据   播放首页音乐
-    wx.myRequest({}, api.Home, function(res) {
-      that.song = res.data;
+      }, 50);
+      that.time = time;
       that.$apply();
-      
-      playMusic.play(that.song,that.song,false,0)
-      wx.setStorageSync('oldList',that.song);
-      wx.setStorageSync("currentSong", res.data);
+      console.log(time,"time")
+    }
+    onLoad(options) {
+      console.log("onLoad");
+      console.log(wx.getStorageSync('idx'),"当前播放的歌曲的位置")
+      let that = this;
+      // 页面带来参数
+      console.log("页面进入参数", options, this.song);
+      // 歌词控制函数
+      // 获取今天是星期几
+      let mydate = new Date();
+      let today = mydate.getDay();
+      console.log(today);
+      this.today = today;
+      let todayWeek = "";
+      if (this.today == "0") {
+        todayWeek = "Sunday";
+      } else if (this.today == "1") {
+        todayWeek = "Monday";
+      } else if (this.today == "2") {
+        todayWeek = "Tuesday";
+      } else if (this.today == "3") {
+        todayWeek = "Wednesday";
+      } else if (this.today == "4") {
+        todayWeek = "Thursday";
+      } else if (this.today == "5") {
+        todayWeek = "Friday";
+      } else if (this.today == "6") {
+        todayWeek = "Saturday";
+      }
+      wx.setStorageSync("todayWeek", todayWeek);
+      this.todayWeek = todayWeek;
+      this.$apply();
+      // 获取广告
+      wx.myRequest({}, api.statAd, function(res) {
+        console.log(res, "广告图片");
+        that.image = res.data.image;
+        that.$apply();
+        setTimeout(function() {
+          that.ADshow = false;
+          that.$apply();
+        }, 3000);
+      });
+      // 获取首页数据   播放首页音乐
+      wx.myRequest({}, api.Home, function(res) {
+        that.song = res.data;
+        console.log(res.data,"首页歌曲数据")
+        that.$apply();
+        playMusic.play(that.song, that.song, false,0, that.cycleSong, that, -1);
+        wx.setStorageSync("oldList", that.song);
 
-      //  控制歌词
-      let lycLength = that.song[0].word.length; //获取歌词有多少句
-      let lycHeight = lycLength * 40; //获取歌词容器的高度
-      getHeight(lycHeight, that);
-      that.song = res.data;
-      that.$apply();
-    });
+        let currentSong = {};
+
+        //  记录用户上次播放位置如果没有默认从首页第一首播放
+             currentSong = that.song[0];
+             console.log(currentSong,"currentSong")
+        // if (!currentSong) {
+        //    wx.setStorageSync("currentSong", res.data[0]);
+        //    wx.setStorageSync('idx', 0)
+        //    currentSong = res.data[0];
+        // }
+        
+        that.currentSong = currentSong;
+        that.$apply();
+        
+        //  控制歌词
+        // let lycLength = that.currentSong.word.length; //获取歌词有多少句
+        // let lycHeight = lycLength * 40 + 354; //获取歌词容器的高度
+
+        that.getHeight(that.currentSong,that);
+        that.song = res.data;
+        that.$apply();
+        // 统计歌曲播放次数
+        wx.myRequest({
+          id: that.song[0].id
+        }, api.songPlayCount, function(res) {
+          console.log(res, '统计歌曲播放次数')
+        })
+      });
+    }
+    onHide() {
+      console.log('页面退出了')
+    }
+    onShareAppMessage() {
+
+    }
   }
-
-  onShareAppMessage: function() {
-
-    }
-}
 </script>

@@ -1,1 +1,1 @@
-{"pages":["pages/adpage","pages/index","pages/list","pages/collect"],"window":{"navigationBarTitleText":"一夜一曲","navigationBarBackgroundColor":"#21282e","navigationBarTextStyle":"#fff"}}
+{"pages":["pages/index","pages/collect","pages/list","pages/adpage"],"window":{"navigationBarTitleText":"一夜一曲","navigationBarBackgroundColor":"#21282e","navigationBarTextStyle":"#fff"}}
